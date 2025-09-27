@@ -1,17 +1,10 @@
 import * as WebOrderModel from "./weborder.model.js";
-import WooCommerceRestApi from "@woocommerce/woocommerce-rest-api";
+import Buffer from "buffer"
 import { configDotenv } from "dotenv";
 
 configDotenv()
 
-const api = () => {
-  return new WooCommerceRestApi({
-    url: process.env.URL,
-    consumerKey: process.env.ConsumerKey,
-    consumerSecret: process.env.ConsumerSecret,
-    version: "wc/v3"
-  })
-}
+
 
 export const updateOrder = async (data) => {
   if (!data.customer || !data.product) {
@@ -19,7 +12,7 @@ export const updateOrder = async (data) => {
   }
 
   try {
-    const res = await api().put("orders/id", {})
+    // const res = await api().put("orders/id", {})
 
     return res
   } catch (error) {
@@ -29,10 +22,30 @@ export const updateOrder = async (data) => {
 };
 
 export const getOrders = async () => {
+  try {
+    // WooCommerce uses Basic Auth
+    const credentials = Buffer.Buffer.from(`${process.env.ConsumerKey}:${process.env.ConsumerSecret}`).toString('base64');
 
+    const res = await fetch(`${process.env.BASE_URL}/orders`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Basic ${credentials}`,
+        'Content-Type': 'application/json'
+      }
+    });
 
-  api().get("/orders").then((res) => {
-    return res.data
-  })
-  return await WebOrderModel.getOrders();
+    if (!res.ok) {
+      throw new Error(`HTTP error! status: ${res.status}`);
+    }
+
+    const data = await res.json();
+    console.log(data); // সব অর্ডার আসবে
+    return data
+  } catch (err) {
+    console.error("Error fetching orders:", err.message);
+  }
+  // return await WebOrderModel.getOrders();
 };
+
+
+
