@@ -1,10 +1,5 @@
+import woocomConfig from "../../config/woo-com/woo.com.config.js";
 import * as WebOrderModel from "./weborder.model.js";
-import Buffer from "buffer"
-import { configDotenv } from "dotenv";
-
-configDotenv()
-
-
 
 export const updateOrder = async (data) => {
   if (!data.customer || !data.product) {
@@ -24,23 +19,21 @@ export const updateOrder = async (data) => {
 export const getOrders = async () => {
   try {
     // WooCommerce uses Basic Auth
-    const credentials = Buffer.Buffer.from(`${process.env.ConsumerKey}:${process.env.ConsumerSecret}`).toString('base64');
-
-    const res = await fetch(`${process.env.BASE_URL}/orders`, {
-      method: 'GET',
-      headers: {
-        'Authorization': `Basic ${credentials}`,
-        'Content-Type': 'application/json'
-      }
-    });
+      const res = woocomConfig("orders")
 
     if (!res.ok) {
       throw new Error(`HTTP error! status: ${res.status}`);
     }
 
-    const data = await res.json();
-    console.log(data); // সব অর্ডার আসবে
-    return data
+    const data = await res.json()
+
+    const mapArr = data.map((data, index) => {
+      const { billing, date_created_gmt, customer_note, line_items } = data
+      console.log("shippinge lines: ", line_items)
+      return {billing, date_created_gmt, customer_note, line_items}
+    })
+
+    return mapArr
   } catch (err) {
     console.error("Error fetching orders:", err.message);
   }

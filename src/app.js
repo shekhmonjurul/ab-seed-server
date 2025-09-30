@@ -6,6 +6,7 @@ import errorMiddleware from "./middleware/error.middleware.js";
 import fraudCheckerRoute from "./modules/fraudchecker-api/fraudchecker.route.js"
 import bodyParser from "body-parser";
 import weborderRoute from "./modules/web-order/weborder.route.js"
+import productRoute from "./modules/products/products.route.js"
 
 const app = express();
 
@@ -28,6 +29,9 @@ app.use("/api/weborders", weborderRoute)
 
 // fraud checker api
 app.use("/api/fraudchecker", bodyParser.json(), fraudCheckerRoute)
+
+// product api
+app.use("/api/products", productRoute)
 
 // Error handling
 app.use(errorMiddleware);
