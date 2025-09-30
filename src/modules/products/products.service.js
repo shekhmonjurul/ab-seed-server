@@ -1,9 +1,9 @@
-import * as woocomConfig from "../../config/woo-com/woo.com.config"
+import {addWooComConfig, getWoocomConfig} from "../../config/woo-com/woo.com.config.js"
  
 export const addProductService = async (data) => {
     try {
         
-        const res = await woocomConfig.addWooComConfig(data, "products")
+        const res = await addWooComConfig(data, "products")
         return await res.json()
         
     } catch (error) {
@@ -14,11 +14,16 @@ export const addProductService = async (data) => {
 
 export const getProductsService = async () => {
     try {
-        const woocom = await woocomConfig.getWoocomConfig('products')
+        const woocom = await getWoocomConfig('products')
         const data = await woocom.json()
-        return data
+        const productInfos = data.map((data)=>{
+            const {name, short_description, sku, price, reguler_price, sale_price, stock_quantity, categories, images, stock_status} = data
+            return {name, short_description, sku, price, reguler_price, sale_price, stock_quantity, categories, images, stock_status}
+    })
+        const productsname = productInfos.map((productInfo) => productInfo.name)
+        console.log("product names: ", productInfos)
+        return productInfos
     } catch (error) {
         console.log(error)
     }
 }
-

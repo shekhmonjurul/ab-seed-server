@@ -1,4 +1,4 @@
-import woocomConfig from "../../config/woo-com/woo.com.config.js";
+import * as woocomConfig from "../../config/woo-com/woo.com.config.js";
 import * as WebOrderModel from "./weborder.model.js";
 
 export const updateOrder = async (data) => {
@@ -19,7 +19,7 @@ export const updateOrder = async (data) => {
 export const getOrders = async () => {
   try {
     // WooCommerce uses Basic Auth
-      const res = woocomConfig("orders")
+      const res = await woocomConfig.getWoocomConfig("orders")
 
     if (!res.ok) {
       throw new Error(`HTTP error! status: ${res.status}`);
@@ -39,6 +39,16 @@ export const getOrders = async () => {
   }
   // return await WebOrderModel.getOrders();
 };
+
+
+
+
+
+
+
+
+
+
 
 
 

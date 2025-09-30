@@ -1,0 +1,306 @@
+{
+  "mgs": "All Product recive successfuly",
+  "data": [
+    {
+      "name": "ফিঙ্গার হার্ভেস্টিং টুল- আর কাঁচি বা ছুরি হাতে নিয়ে ঝামেলা নয়—শুধু আঙুলে পরুন আর সহজেই কেটে ফেলুন মরিচ, শসা, বেগুন কিংবা যেকোনো সবজি",
+      "short_description": "",
+      "sku": "",
+      "price": "",
+      "sale_price": "",
+      "stock_quantity": null,
+      "categories": [],
+      "images": []
+    },
+    {
+      "name": "সবুজ আপেল টমেটো (আনুমানিক ২০০ বীজ) সবুজ রঙের একেবারেই ভিন্নধর্মী টমেটো – আপেলের মতো টাটকা, ঘন শাঁসযুক্ত ও অসাধারণ স্বাদের বিশেষ জাত",
+      "short_description": "",
+      "sku": "sobuj tometo- tomato- apple",
+      "price": "82",
+      "sale_price": "82",
+      "stock_quantity": null,
+      "categories": [
+        {
+          "id": 72,
+          "name": "ইমপোর্টকৃত",
+          "slug": "%e0%a6%87%e0%a6%ae%e0%a6%aa%e0%a7%8b%e0%a6%b0%e0%a7%8d%e0%a6%9f%e0%a6%95%e0%a7%83%e0%a6%a4"
+        }
+      ],
+      "images": [
+        {
+          "id": 58374,
+          "date_created": "2025-10-01T00:23:16",
+          "date_created_gmt": "2025-09-30T12:23:16",
+          "date_modified": "2025-10-01T00:23:35",
+          "date_modified_gmt": "2025-09-30T12:23:35",
+          "src": "https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-23.jpg",
+          "name": "AB Seed (সবুজ টমেটো)",
+          "alt": "সবুজ টমেটো",
+          "srcset": "https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-23.jpg 1058w, https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-23-300x300.jpg 300w, https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-23-1024x1024.jpg 1024w, https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-23-150x150.jpg 150w, https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-23-768x768.jpg 768w, https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-23-600x600.jpg 600w, https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-23-100x100.jpg 100w, https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-23-64x64.jpg 64w",
+          "sizes": "(max-width: 1058px) 100vw, 1058px",
+          "thumbnail": "https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-23-300x300.jpg"
+        }
+      ]
+    },
+    {
+      "name": "আম টমেটো (আনুমানিক ১০০ বীজ) আমের মতো আকারের টমেটো – রঙে লালচে, মিষ্টি রসালো ও ঘন শাঁসযুক্ত, বাজারে একেবারেই ভিন্ন স্বাদের বিশেষ জাত",
+      "short_description": "",
+      "sku": "am tomato- tometo-",
+      "price": "89",
+      "sale_price": "89",
+      "stock_quantity": null,
+      "categories": [
+        {
+          "id": 72,
+          "name": "ইমপোর্টকৃত",
+          "slug": "%e0%a6%87%e0%a6%ae%e0%a6%aa%e0%a7%8b%e0%a6%b0%e0%a7%8d%e0%a6%9f%e0%a6%95%e0%a7%83%e0%a6%a4"
+        }
+      ],
+      "images": [
+        {
+          "id": 58370,
+          "date_created": "2025-10-01T00:13:24",
+          "date_created_gmt": "2025-09-30T12:13:24",
+          "date_modified": "2025-10-01T00:13:31",
+          "date_modified_gmt": "2025-09-30T12:13:31",
+          "src": "https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-22.jpg",
+          "name": "AB Seed (আম টমেটো)",
+          "alt": "আম টমেটো",
+          "srcset": "https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-22.jpg 1058w, https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-22-300x300.jpg 300w, https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-22-1024x1024.jpg 1024w, https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-22-150x150.jpg 150w, https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-22-768x768.jpg 768w, https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-22-600x600.jpg 600w, https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-22-100x100.jpg 100w, https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-22-64x64.jpg 64w",
+          "sizes": "(max-width: 1058px) 100vw, 1058px",
+          "thumbnail": "https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-22-300x300.jpg"
+        }
+      ]
+    },
+    {
+      "name": "হাইব্রিড বড় লাল টমেটো (আনুমানিক ২০০+ বীজ) গোলাকার বড় আকারের টমেটো, উজ্জ্বল লাল রঙ – প্রতিটি ফল গড়ে ২০০ গ্রাম ওজনের",
+      "short_description": "",
+      "sku": "F1 Tometo- Tomato- Hybrid- Huajun",
+      "price": "165",
+      "sale_price": "165",
+      "stock_quantity": null,
+      "categories": [
+        {
+          "id": 72,
+          "name": "ইমপোর্টকৃত",
+          "slug": "%e0%a6%87%e0%a6%ae%e0%a6%aa%e0%a7%8b%e0%a6%b0%e0%a7%8d%e0%a6%9f%e0%a6%95%e0%a7%83%e0%a6%a4"
+        }
+      ],
+      "images": [
+        {
+          "id": 58361,
+          "date_created": "2025-09-30T23:37:28",
+          "date_created_gmt": "2025-09-30T11:37:28",
+          "date_modified": "2025-09-30T23:37:33",
+          "date_modified_gmt": "2025-09-30T11:37:33",
+          "src": "https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-21-1.jpg",
+          "name": "AB Seed (টমেটো)",
+          "alt": "টমেটো",
+          "srcset": "https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-21-1.jpg 1058w, https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-21-1-300x300.jpg 300w, https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-21-1-1024x1024.jpg 1024w, https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-21-1-150x150.jpg 150w, https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-21-1-768x768.jpg 768w, https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-21-1-600x600.jpg 600w, https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-21-1-100x100.jpg 100w, https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-21-1-64x64.jpg 64w",
+          "sizes": "(max-width: 1058px) 100vw, 1058px",
+          "thumbnail": "https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-21-1-300x300.jpg"
+        }
+      ]
+    },
+    {
+      "name": "কেজি বেগুন- বারি ১২, প্রতিটি বেগুনের ওজন প্রায় ১ কেজি (আনুমানিক ২০০+ বীজ) শতভাগ অরিজিনাল বীজ নিশ্চয়তা",
+      "short_description": "",
+      "sku": "keji begun- bari 12",
+      "price": "120",
+      "sale_price": "120",
+      "stock_quantity": null,
+      "categories": [
+        {
+          "id": 69,
+          "name": "অধিক চাহিদা",
+          "slug": "%e0%a6%85%e0%a6%a7%e0%a6%bf%e0%a6%95-%e0%a6%9a%e0%a6%be%e0%a6%b9%e0%a6%bf%e0%a6%a6%e0%a6%be"
+        }
+      ],
+      "images": [
+        {
+          "id": 58016,
+          "date_created": "2025-09-29T20:21:31",
+          "date_created_gmt": "2025-09-29T08:21:31",
+          "date_modified": "2025-09-29T20:21:52",
+          "date_modified_gmt": "2025-09-29T08:21:52",
+          "src": "https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-20-1.jpg",
+          "name": "AB Seed (কেজি বেগুন)",
+          "alt": "কেজি বেগুন",
+          "srcset": "https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-20-1.jpg 1058w, https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-20-1-300x300.jpg 300w, https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-20-1-1024x1024.jpg 1024w, https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-20-1-150x150.jpg 150w, https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-20-1-768x768.jpg 768w, https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-20-1-600x600.jpg 600w, https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-20-1-100x100.jpg 100w, https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-20-1-64x64.jpg 64w",
+          "sizes": "(max-width: 1058px) 100vw, 1058px",
+          "thumbnail": "https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-20-1-300x300.jpg"
+        }
+      ]
+    },
+    {
+      "name": "ক্যালিফোর্নিয়া পপি ফুল, সোনালি-হলুদ রঙের ঝলমলে ফুল – বাগানের প্রতিটি কোণ করে তোলে উৎসবমুখর (আনুমানিক ৫০০ ক্ষুদ্র দানা)",
+      "short_description": "",
+      "sku": "caly- popy- ful-",
+      "price": "82",
+      "sale_price": "82",
+      "stock_quantity": null,
+      "categories": [
+        {
+          "id": 72,
+          "name": "ইমপোর্টকৃত",
+          "slug": "%e0%a6%87%e0%a6%ae%e0%a6%aa%e0%a7%8b%e0%a6%b0%e0%a7%8d%e0%a6%9f%e0%a6%95%e0%a7%83%e0%a6%a4"
+        },
+        {
+          "id": 91,
+          "name": "ফুলের বীজ",
+          "slug": "%e0%a6%ab%e0%a7%81%e0%a6%b2%e0%a7%87%e0%a6%b0-%e0%a6%ac%e0%a7%80%e0%a6%9c"
+        }
+      ],
+      "images": [
+        {
+          "id": 57814,
+          "date_created": "2025-09-28T18:42:05",
+          "date_created_gmt": "2025-09-28T06:42:05",
+          "date_modified": "2025-09-28T18:42:21",
+          "date_modified_gmt": "2025-09-28T06:42:21",
+          "src": "https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-21.jpg",
+          "name": "AB Seed (ক্যালিফোর্নিয়া পপি ফুল)",
+          "alt": "ক্যালিফোর্নিয়া পপি ফুল",
+          "srcset": "https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-21.jpg 1058w, https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-21-300x300.jpg 300w, https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-21-1024x1024.jpg 1024w, https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-21-150x150.jpg 150w, https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-21-768x768.jpg 768w, https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-21-600x600.jpg 600w, https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-21-100x100.jpg 100w, https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-21-64x64.jpg 64w",
+          "sizes": "(max-width: 1058px) 100vw, 1058px",
+          "thumbnail": "https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-21-300x300.jpg"
+        }
+      ]
+    },
+    {
+      "name": "অ্যাস্টার ফুল, রঙিন ঝলমলে পাপড়ির ফুল – একবার ফুল ফুটলে চারপাশ যেন উৎসবমুখর হয়ে ওঠে (আনুমানিক ৬০০ ক্ষুদ্র দানা)",
+      "short_description": "",
+      "sku": "aster ful-",
+      "price": "102",
+      "sale_price": "102",
+      "stock_quantity": null,
+      "categories": [
+        {
+          "id": 72,
+          "name": "ইমপোর্টকৃত",
+          "slug": "%e0%a6%87%e0%a6%ae%e0%a6%aa%e0%a7%8b%e0%a6%b0%e0%a7%8d%e0%a6%9f%e0%a6%95%e0%a7%83%e0%a6%a4"
+        },
+        {
+          "id": 91,
+          "name": "ফুলের বীজ",
+          "slug": "%e0%a6%ab%e0%a7%81%e0%a6%b2%e0%a7%87%e0%a6%b0-%e0%a6%ac%e0%a7%80%e0%a6%9c"
+        }
+      ],
+      "images": [
+        {
+          "id": 57809,
+          "date_created": "2025-09-28T18:33:00",
+          "date_created_gmt": "2025-09-28T06:33:00",
+          "date_modified": "2025-09-28T18:33:21",
+          "date_modified_gmt": "2025-09-28T06:33:21",
+          "src": "https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-20.jpg",
+          "name": "AB Seed (অ্যাস্টার ফুল)",
+          "alt": "অ্যাস্টার ফুল",
+          "srcset": "https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-20.jpg 1058w, https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-20-300x300.jpg 300w, https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-20-1024x1024.jpg 1024w, https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-20-150x150.jpg 150w, https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-20-768x768.jpg 768w, https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-20-600x600.jpg 600w, https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-20-100x100.jpg 100w, https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-20-64x64.jpg 64w",
+          "sizes": "(max-width: 1058px) 100vw, 1058px",
+          "thumbnail": "https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-20-300x300.jpg"
+        }
+      ]
+    },
+    {
+      "name": "কার্নেশন ফুল- ভালোবাসা, আকর্ষণ ও শ্রদ্ধার প্রতীক বলা হয়। একবার রোপণ করলে একাধিক মৌসুমে চমৎকার রঙিন ফুল ফোটে (আনুমানিক ৪০০+ বীজ)",
+      "short_description": "",
+      "sku": "ful - fl",
+      "price": "92",
+      "sale_price": "92",
+      "stock_quantity": null,
+      "categories": [
+        {
+          "id": 72,
+          "name": "ইমপোর্টকৃত",
+          "slug": "%e0%a6%87%e0%a6%ae%e0%a6%aa%e0%a7%8b%e0%a6%b0%e0%a7%8d%e0%a6%9f%e0%a6%95%e0%a7%83%e0%a6%a4"
+        },
+        {
+          "id": 91,
+          "name": "ফুলের বীজ",
+          "slug": "%e0%a6%ab%e0%a7%81%e0%a6%b2%e0%a7%87%e0%a6%b0-%e0%a6%ac%e0%a7%80%e0%a6%9c"
+        }
+      ],
+      "images": [
+        {
+          "id": 57510,
+          "date_created": "2025-09-25T03:22:01",
+          "date_created_gmt": "2025-09-24T15:22:01",
+          "date_modified": "2025-09-25T03:22:07",
+          "date_modified_gmt": "2025-09-24T15:22:07",
+          "src": "https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-17.jpg",
+          "name": "AB Seed (কার্নেশন ফুল)",
+          "alt": "কার্নেশন ফুল",
+          "srcset": "https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-17.jpg 1058w, https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-17-300x300.jpg 300w, https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-17-1024x1024.jpg 1024w, https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-17-150x150.jpg 150w, https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-17-768x768.jpg 768w, https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-17-600x600.jpg 600w, https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-17-100x100.jpg 100w, https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-17-64x64.jpg 64w",
+          "sizes": "(max-width: 1058px) 100vw, 1058px",
+          "thumbnail": "https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-17-300x300.jpg"
+        }
+      ]
+    },
+    {
+      "name": "সুইট অ্যালিসাম (আনুমানিক 300+ বীজ)মিষ্টি সুবাস আর সাদা-গোলাপি ছোট ছোট গুচ্ছফুলে ভরে উঠুক বারান্দা-ছাদ",
+      "short_description": "",
+      "sku": "ful-",
+      "price": "86",
+      "sale_price": "86",
+      "stock_quantity": null,
+      "categories": [
+        {
+          "id": 72,
+          "name": "ইমপোর্টকৃত",
+          "slug": "%e0%a6%87%e0%a6%ae%e0%a6%aa%e0%a7%8b%e0%a6%b0%e0%a7%8d%e0%a6%9f%e0%a6%95%e0%a7%83%e0%a6%a4"
+        },
+        {
+          "id": 91,
+          "name": "ফুলের বীজ",
+          "slug": "%e0%a6%ab%e0%a7%81%e0%a6%b2%e0%a7%87%e0%a6%b0-%e0%a6%ac%e0%a7%80%e0%a6%9c"
+        }
+      ],
+      "images": [
+        {
+          "id": 57508,
+          "date_created": "2025-09-25T03:17:30",
+          "date_created_gmt": "2025-09-24T15:17:30",
+          "date_modified": "2025-09-25T03:17:41",
+          "date_modified_gmt": "2025-09-24T15:17:41",
+          "src": "https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-19.jpg",
+          "name": "AB Seed (সুইট অ্যালিসাম)",
+          "alt": "সুইট অ্যালিসাম",
+          "srcset": "https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-19.jpg 1058w, https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-19-300x300.jpg 300w, https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-19-1024x1024.jpg 1024w, https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-19-150x150.jpg 150w, https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-19-768x768.jpg 768w, https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-19-600x600.jpg 600w, https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-19-100x100.jpg 100w, https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-19-64x64.jpg 64w",
+          "sizes": "(max-width: 1058px) 100vw, 1058px",
+          "thumbnail": "https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-19-300x300.jpg"
+        }
+      ]
+    },
+    {
+      "name": "আমদানিকৃত হলুদ ফুলকপির বীজ—দেখতে আকর্ষণীয়, খেতে সুস্বাদু ও পুষ্টিকর; প্রতি প্যাকেটে আনুমানিক ১০০+ বীজ",
+      "short_description": "",
+      "sku": "holud fulkopi- fulcopi",
+      "price": "120",
+      "sale_price": "120",
+      "stock_quantity": null,
+      "categories": [
+        {
+          "id": 72,
+          "name": "ইমপোর্টকৃত",
+          "slug": "%e0%a6%87%e0%a6%ae%e0%a6%aa%e0%a7%8b%e0%a6%b0%e0%a7%8d%e0%a6%9f%e0%a6%95%e0%a7%83%e0%a6%a4"
+        }
+      ],
+      "images": [
+        {
+          "id": 57491,
+          "date_created": "2025-09-25T02:44:05",
+          "date_created_gmt": "2025-09-24T14:44:05",
+          "date_modified": "2025-09-25T02:44:12",
+          "date_modified_gmt": "2025-09-24T14:44:12",
+          "src": "https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-18.jpg",
+          "name": "AB Seed (হলুদ ফুলকপি)",
+          "alt": "হলুদ ফুলকপি",
+          "srcset": "https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-18.jpg 1058w, https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-18-300x300.jpg 300w, https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-18-1024x1024.jpg 1024w, https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-18-150x150.jpg 150w, https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-18-768x768.jpg 768w, https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-18-600x600.jpg 600w, https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-18-100x100.jpg 100w, https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-18-64x64.jpg 64w",
+          "sizes": "(max-width: 1058px) 100vw, 1058px",
+          "thumbnail": "https://bij-bd.com/wp-content/uploads/2025/09/AB-Seed-18-300x300.jpg"
+        }
+      ]
+    }
+  ],
+  "ok": true
+}
