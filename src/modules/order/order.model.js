@@ -1,4 +1,4 @@
-import db from "../../config/database/fraud/database.js";
+import db from "../../config/database/orders/orders.js";
 
 export const insertOrder = async (orderData) => {
   const conn = await db.getConnection();
@@ -55,7 +55,7 @@ export const insertOrder = async (orderData) => {
 };
 
 export const getAllOrders = async () => {
-  const [rows] = await db.query(`
+  const sql = `
     SELECT 
       o.id as order_id,
       o.pid,
@@ -75,7 +75,8 @@ export const getAllOrders = async () => {
     LEFT JOIN customers c ON o.id = c.order_id
     LEFT JOIN products p ON o.id = p.order_id
     ORDER BY o.id DESC
-  `);
+  `
+  const [rows] = await db.query(sql);
 
   if (rows.length === 0) return [];
 
