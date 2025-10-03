@@ -8,7 +8,7 @@ dotenv.config()
 export const getFraud = async (data) => {
 
     const apiKey = process.env.Fraud_Checker_Api;
-    const phone = data?.number || "01716550180";
+    const phone = "01716550180";
 
     const fraud = await FraudModel.getFraudData(phone)
 
@@ -30,7 +30,7 @@ export const getFraud = async (data) => {
             const currire = await res.json()
             const { mobile_number, total_parcels, total_delivered, total_cancel, apis } = currire
 
-            const courierArray = Object.values(apis).map(c => ({
+            const courierArray = Object.values(apis)?.map(c => ({
                 courier_name: c.courier_name,
                 total_parcels: Number(c.total_parcels),
                 total_delivered_parcels: Number(c.total_delivered_parcels),

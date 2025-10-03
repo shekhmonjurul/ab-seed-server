@@ -1,4 +1,4 @@
-import db from "../../config/database.js";
+import db from "../../config/database/fraud/database.js";
 
 export const insertOrder = async (orderData) => {
   const conn = await db.getConnection();

@@ -1,4 +1,4 @@
-import db from "../../config/database.js";
+import db from "../../config/database/fraud/database.js"
 
 // inser model herer
 export const insert_fraud_checker = async (data) => {
@@ -12,12 +12,12 @@ export const insert_fraud_courier_history = async (fraudId, couriers) => {
 
   try {
     // Prepare values array for multiple insert
-    const values = couriers.map(c => [
+    const values = couriers?.map(c => [
       fraudId,
-      c.courier_name,
-      c.total_parcels,
-      c.total_delivered_parcels,
-      c.total_cancelled_parcels
+      c?.courier_name,
+      c?.total_parcels,
+      c?.total_delivered_parcels,
+      c?.total_cancelled_parcels
     ]);
 
     // Execute multiple insert
