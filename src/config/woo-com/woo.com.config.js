@@ -15,7 +15,17 @@ export const getWoocomConfig = async (route) => {
         }
     });
 
-    return res
+    if (!res.ok) {
+        throw new Error(`Request failed: ${res.status}`)
+    }
+    const data = await res.json()
+
+    const products = res.headers.get("x-wp-total")
+    const pages = res.headers.get("x-wp-totalpages")
+    console.log("products: ", products)
+    console.log("pages: ", pages)
+
+    return data
 }
 
 export const addWooComConfig = async (data = {}, route) => {
@@ -30,4 +40,25 @@ export const addWooComConfig = async (data = {}, route) => {
     });
 
     return res
+}
+
+
+export async function getProducts(limit, page = 1) {
+    const url = `${process.env.BASE_URL}/products/?per_page=${limit}&page=${page}`
+    const res = await fetch(url, {
+        headers: {
+            'Authorization': `Basic ${credentials}`,
+            'Content-Type': 'application/json'
+        }
+    })
+    if (!res.ok)
+        throw new Error("Requst faild: ", res.status)
+    const data = await res.json()
+
+    const products = res.headers.get("x-wp-total")
+    const pages = res.headers.get("x-wp-totalpages")
+    console.log("products: ", products)
+    console.log("pages: ", pages)
+
+    return data
 }
