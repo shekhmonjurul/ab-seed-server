@@ -4,7 +4,7 @@ export const addOrder = async (data) => {
   // if (!data?.customer || !data?.product) {
   //   throw new Error("Customer and product required");
   // }
-
+  
   const newOrder = {
   pid: "P123",
   orderid: "ORD-456",
