@@ -19,21 +19,19 @@ export const updateOrder = async (data) => {
 export const getOrders = async () => {
   try {
     // WooCommerce uses Basic Auth
-      const res = await woocomConfig.getWoocomConfig("orders")
-
-    if (!res.ok) {
-      throw new Error(`HTTP error! status: ${res.status}`);
-    }
-
-    const data = await res.json()
-
-    const mapArr = data.map((data, index) => {
-      const { billing, date_created_gmt, customer_note, line_items } = data
-      console.log("shippinge lines: ", line_items)
-      return {billing, date_created_gmt, customer_note, line_items}
+    const orders = await woocomConfig.getAll({
+      routename: "orders",
+      limit: 10,
+      page: 1
     })
 
-    return mapArr
+    const orderInfo = orders.map((data, index) => {
+      const {id, billing, date_created_gmt, customer_note, line_items, payment_method } = data
+      console.log("shippinge lines: ", line_items)
+      return {id, billing, date_created_gmt, customer_note, line_items, payment_method }
+    })
+
+    return orderInfo
   } catch (err) {
     console.error("Error fetching orders:", err.message);
   }

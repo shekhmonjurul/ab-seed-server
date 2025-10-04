@@ -1,4 +1,4 @@
-import { addWooComConfig, getProducts, getWoocomConfig } from "../../config/woo-com/woo.com.config.js"
+import { addWooComConfig, getAll, getWoocomConfig } from "../../config/woo-com/woo.com.config.js"
 
 export const addProductService = async (data) => {
     try {
@@ -13,12 +13,16 @@ export const addProductService = async (data) => {
 
 export const getProductsService = async () => {
     try {
-        const products = await getProducts(5, 1)
+        const products = await getAll({
+            routename: "products",
+            limit: 5,
+            page: 1
+        })
         let productInfos = []
         if (products) {
             productInfos = products.map((data) => {
-                const { name, short_description, sku, price, reguler_price, sale_price, stock_quantity, categories, images, stock_status } = data
-                return { name, short_description, sku, price, reguler_price, sale_price, stock_quantity, categories, images, stock_status }
+                const {id, name, short_description, sku, price, reguler_price, sale_price, stock_quantity, categories, images, stock_status } = data
+                return {id, name, short_description, sku, price, reguler_price, sale_price, stock_quantity, categories, images, stock_status }
             })
         } else {
             return "woo-com api conection faild"

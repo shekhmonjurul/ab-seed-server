@@ -42,9 +42,12 @@ export const addWooComConfig = async (data = {}, route) => {
     return res
 }
 
-
-export async function getProducts(limit, page = 1) {
-    const url = `${process.env.BASE_URL}/products/?per_page=${limit}&page=${page}`
+export async function getAll(urlInfo = {
+    routename: "products",
+    limit: 20,
+    page: 1
+}) {
+    const url = `${process.env.BASE_URL}/${urlInfo?.routename}/?per_page=${urlInfo?.limit}&page=${urlInfo?.page}`
     const res = await fetch(url, {
         headers: {
             'Authorization': `Basic ${credentials}`,
@@ -55,9 +58,9 @@ export async function getProducts(limit, page = 1) {
         throw new Error("Requst faild: ", res.status)
     const data = await res.json()
 
-    const products = res.headers.get("x-wp-total")
+    const allDetails = res.headers.get("x-wp-total")
     const pages = res.headers.get("x-wp-totalpages")
-    console.log("products: ", products)
+    console.log("All details: ", allDetails)
     console.log("pages: ", pages)
 
     return data
