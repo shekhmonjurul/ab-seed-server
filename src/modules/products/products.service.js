@@ -1,4 +1,4 @@
-import { addWooComConfig, getAll, getWoocomConfig } from "../../config/woo-com/woo.com.config.js"
+import { addWooComConfig, getAll,} from "../../config/woo-com/woo.com.config.js"
 
 export const addProductService = async (data) => {
     try {
@@ -13,11 +13,13 @@ export const addProductService = async (data) => {
 
 export const getProductsService = async () => {
     try {
-        const products = await getAll({
+        const urlInfo= {
             routename: "products",
             limit: 5,
             page: 1
-        })
+        }
+        const routename = `${urlInfo?.routename}/?per_page=${urlInfo?.limit}&page=${urlInfo?.page}`
+        const products = await getAll(routename)
         let productInfos = []
         if (products) {
             productInfos = products.map((data) => {

@@ -5,7 +5,7 @@ configDotenv()
 
 const credentials = Buffer.Buffer.from(`${process.env.ConsumerKey}:${process.env.ConsumerSecret}`).toString('base64');
 
-export const getWoocomConfig = async (route) => {
+export const getSingelWoocomConfig = async (route) => {
 
     const res = await fetch(`${process.env.BASE_URL}/${route}`, {
         method: 'GET',
@@ -19,11 +19,6 @@ export const getWoocomConfig = async (route) => {
         throw new Error(`Request failed: ${res.status}`)
     }
     const data = await res.json()
-
-    const products = res.headers.get("x-wp-total")
-    const pages = res.headers.get("x-wp-totalpages")
-    console.log("products: ", products)
-    console.log("pages: ", pages)
 
     return data
 }
@@ -65,3 +60,4 @@ export async function getAll(urlInfo = {
 
     return data
 }
+
