@@ -15,7 +15,7 @@ export const getProductsService = async () => {
     try {
         const products = await getAll({
             routename: "products",
-            limit: 5,
+            limit: 10,
             page: 1
         })
         let productInfos = []
