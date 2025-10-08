@@ -10,7 +10,7 @@ export const getProducts = async (req, res, next) => {
                 data,
                 ok: true
             })
-        }else{
+        } else {
             res.status(404).json({
                 mgs: "No data found",
                 data: [],
@@ -35,4 +35,21 @@ export const addProduct = async (req, res, next) => {
         next(error)
     }
 
+}
+
+export const searchProductController = async (req, res, next) => {
+    try {
+        const search = req?.query.search
+        if (!search) {
+            next()
+            return
+        }
+        console.log(search)
+        const data = await productService.setcerProducts(search)
+        if (!data) res.status(404).json({ mgs: "data not found", sku, data: [] })
+        res.status(200).json({ mgs: "recive data all", ok: true, data })
+
+    } catch (error) {
+        next(error)
+    }
 }

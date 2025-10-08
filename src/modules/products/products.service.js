@@ -1,4 +1,4 @@
-import { addWooComConfig, getAll, } from "../../config/woo-com/woo.com.config.js"
+import { addWooComConfig, getAll, getSingelWoocomConfig, } from "../../config/woo-com/woo.com.config.js"
 
 export const addProductService = async (data) => {
     try {
@@ -21,8 +21,8 @@ export const getProductsService = async () => {
         let productInfos = []
         if (products) {
             productInfos = products.map((data) => {
-                const {id, name, short_description, sku, price, reguler_price, sale_price, stock_quantity, categories, images, stock_status } = data
-                return {id, name, short_description, sku, price, reguler_price, sale_price, stock_quantity, categories, images, stock_status }
+                const { id, name, short_description, sku, price, regular_price, sale_price, stock_quantity, categories, images, stock_status } = data
+                return { id, name, short_description, sku, price, regular_price, sale_price, stock_quantity, categories, images, stock_status }
             })
         } else {
             return "woo-com api conection faild"
@@ -32,4 +32,16 @@ export const getProductsService = async () => {
     } catch (error) {
         console.log(error)
     }
+}
+
+export const setcerProducts = async (search) => {
+    const routename = `products?search=${encodeURIComponent(search)}&per_page=20`
+    const products = await getSingelWoocomConfig(routename)
+    if (!products) return
+    const serchdata = products.map((product, index) => {
+        const { id, name, short_description, sku, price, regular_price, sale_price, stock_quantity, categories, images, stock_status } = product
+        return { id, name, short_description, sku, price, regular_price, sale_price, stock_quantity, categories, images, stock_status }
+
+    })
+    return serchdata
 }
