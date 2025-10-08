@@ -19,8 +19,8 @@ app.use(morgan("dev"));
 
 
 // Home route
-app.get("/", (req, res)=>{
-    res.status(200).json({home: "Ab Seed Company"})
+app.get("/", (req, res) => {
+    res.status(200).json({ home: "Ab Seed Company" })
 })
 // Routes
 // order api
