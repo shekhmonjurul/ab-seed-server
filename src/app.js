@@ -11,6 +11,7 @@ import searchRoute from "./modules/search/search.route.js"
 
 const app = express();
 
+
 // Middlewares
 app.use(cors());
 app.use(express.json());
