@@ -8,6 +8,7 @@ import bodyParser from "body-parser";
 import weborderRoute from "./modules/web-order/weborder.route.js"
 import productRoute from "./modules/products/products.route.js"
 import searchRoute from "./modules/search/search.route.js"
+import steadfastRoute from "./modules/steadfast/steadfast.route.js"
 
 const app = express();
 
@@ -37,6 +38,9 @@ app.use("/api/products", productRoute)
 
 // serach api 
 app.use("/api/filter/", searchRoute)
+
+// steadfast api 
+app.use("/api/steadfast/", steadfastRoute)
 
 // Error handling
 app.use(errorMiddleware);
