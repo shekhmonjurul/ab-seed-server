@@ -13,7 +13,20 @@ export const placingOrderService = async (order) => {
     if(!dbres)return
     return dbres
 }
-export const bulkOrderService = (orders) => { }
+export const bulkOrderService = async(orders) => { 
+    const {path, method} = bulkorders
+    const stres = await steadfastApiCall(path, method, orders)
+    if(!stres)return
+    const dbresponses =  stres?.map(async(currier)=>{
+        const dbdata = await createCurrierModel(currier)
+        return dbdata
+    })
+    if(!dbresponses)return
+    return dbresponses
+}
+
+
+
 export const currierStatusService = (search) => { }
 export const webhookService = (currier = {}) => { }
 
