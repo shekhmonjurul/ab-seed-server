@@ -1,9 +1,10 @@
 import { handelTryCatch } from "../../utils/handel.try.catch"
 import { errorResponse, successResponse } from "../../utils/respones"
+import { placingOrderService, bulkOrderService, currierStatusService, webhookService } from "./steadfast.service.js"
 
 export const placingOrderControllelr = async (req, res, next) => {
-  handelTryCatch(req, res, next, async(req, res)=>{
-     const {
+    handelTryCatch(req, res, next, async (req, res) => {
+        const {
             invoice,
             recipientName,
             recipientPhone,
@@ -24,7 +25,7 @@ export const placingOrderControllelr = async (req, res, next) => {
                 status: 400,
                 badreq: `Bad request`
             }
-          return  errorResponse(res, 400, json)
+            return errorResponse(res, 400, json)
         }
 
         const body = {
@@ -42,7 +43,7 @@ export const placingOrderControllelr = async (req, res, next) => {
         }
         const data = await placingOrderService(body)
         if (!data) {
-          return  errorResponse(res, 500, {
+            return errorResponse(res, 500, {
                 ok: false,
                 data: data,
                 status: 500,
@@ -50,19 +51,19 @@ export const placingOrderControllelr = async (req, res, next) => {
             })
         }
 
-      return successResponse(res, 200, {
+        return successResponse(res, 200, {
             message: "Currier create successfuly",
             status: 200,
             data: data,
         })
-  })
+    })
 }
 
 export const bulkOrderController = async (req, res, next) => {
-    handelTryCatch(req, res, next, async(req, res)=>{
+    handelTryCatch(req, res, next, async (req, res) => {
         const { bulkorders } = req?.body || []
         if (bulkorders.length === 0) {
-           return errorResponse(res, 400, {
+            return errorResponse(res, 400, {
                 message: "Plese create a list of currier orders",
                 ok: false,
                 status: 400
@@ -70,20 +71,38 @@ export const bulkOrderController = async (req, res, next) => {
         }
         const data = await bulkOrderService(bulkorders)
         if (!data) {
-           return errorResponse(res, 500, {
+            return errorResponse(res, 500, {
                 message: "Internal server error",
                 status: 500,
                 data: data
             })
         }
-       return successResponse(res, 200, {
+        return successResponse(res, 200, {
             message: 'create currier order list successfuly',
             status: 500,
             ok: true
         })
     })
 }
-export const webhookController = (req, res, next) => { }
+export const webhookController = (req, res, next) => {
+    handelTryCatch(req, res, next, async(req, res)=>{
+        const {order_id, order_status, tracking_code, updated_at} = req.body
+        const data = await webhookService({order_id, order_status, tracking_code, updated_at})
+        if(!data){
+           return errorResponse(res, 500, {
+                message: "web hook porssing faild",
+                ok: false,
+                status: 500
+            })
+        }
+       return successResponse(res, 200, {
+            message: "web hook prossecing successfuly",
+            ok: true,
+            status: 200,
+            data
+        })
+    })
+ }
 
 export const currierStatusController = (req, res, next) => {
     handelTryCatch(req, res, next, async (req, res) => {
@@ -110,4 +129,3 @@ export const currierStatusController = (req, res, next) => {
         })
     })
 }
-
