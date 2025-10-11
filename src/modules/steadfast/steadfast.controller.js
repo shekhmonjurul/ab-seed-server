@@ -6,19 +6,19 @@ export const placingOrderControllelr = async (req, res, next) => {
     handelTryCatch(req, res, next, async (req, res) => {
         const {
             invoice,
-            recipientName,
-            recipientPhone,
-            alternativePhone,
-            recipientEmail,
-            recipientAddress,
-            codAmount,
+            recipient_name,
+            recipient_phone,
+            alternative_phone,
+            recipient_email,
+            recipient_address,
+            cod_amount,
             note,
-            itemDescription,
-            totalLot,
-            deliveryType
+            item_description,
+            total_lot,
+            delivery_type
         } = req?.body || {}
 
-        if (!invoice && !recipientName && !recipientPhone && !recipientAddress && !codAmount) {
+        if (!invoice && !recipient_name && !recipient_phone && !recipient_address && !cod_amount) {
             const json = {
                 message: `invoice, recipientName, recipientPhone, recipientAddress, codAmount are required`,
                 ok: false,
@@ -30,16 +30,16 @@ export const placingOrderControllelr = async (req, res, next) => {
 
         const body = {
             invoice,
-            recipientName,
-            recipientPhone,
-            alternativePhone,
-            recipientEmail,
-            recipientAddress,
-            codAmount,
+            recipient_name,
+            recipient_phone,
+            alternative_phone,
+            recipient_email,
+            recipient_address,
+            cod_amount,
             note,
-            itemDescription,
-            totalLot,
-            deliveryType
+            item_description,
+            total_lot,
+            delivery_type
         }
         const data = await placingOrderService(body)
         if (!data) {
@@ -106,10 +106,11 @@ export const webhookController = (req, res, next) => {
 
 export const currierStatusController = (req, res, next) => {
     handelTryCatch(req, res, next, async (req, res) => {
-        res.json({message: "hi monjurul islam"})
         const { search } = req?.query
         const data = await currierStatusService(search)
-        if (!data) {
+        console.log("data: ", data, 'query: ', search);
+        
+        if (data.length === 0) {
             return errorResponse(res, 404, {
                 message: "Data not found",
                 ok: false,
