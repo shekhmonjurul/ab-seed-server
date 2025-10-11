@@ -12,20 +12,26 @@ export const placingOrderService = async (order) => {
     const dbdata = {recipient_name, recipient_phone, consignment_id, invoice, tracking_code, recipient_name, status, note, created_at, updated_at}
     const dbres = await insertCurrierModel(dbdata)
     if(!dbres)return
-    console.log("data: ", dbres);
+    console.log("data: ", data);
     
     return dbres
 }
 export const bulkOrderService = async(orders) => { 
     const {path, method} = bulkorders
-    const stres = await steadfastApiCall(path, method, orders)
-    if(!stres)return
-    const dbresponses =  stres?.map(async(currier)=>{
+    const {status, message, data} = await steadfastApiCall(path, method, orders) || []
+    console.log("data: ", data, message, status)
+    if(data?.length === 0)return
+    const dbresponses =  data?.map(async(currier)=>{
+        if(currier?.error) currier.status = currier.error
         const dbdata = await insertCurrierModel(currier)
         return dbdata
     })
     if(!dbresponses)return
-    return dbresponses
+    return {
+        dbresponses,
+        message,
+        status,
+    }
 }
 
 

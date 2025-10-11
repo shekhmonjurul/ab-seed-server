@@ -41,6 +41,7 @@ export const placingOrderControllelr = async (req, res, next) => {
             total_lot,
             delivery_type
         }
+
         const data = await placingOrderService(body)
         if (!data) {
             return errorResponse(res, 500, {
@@ -61,25 +62,26 @@ export const placingOrderControllelr = async (req, res, next) => {
 
 export const bulkOrderController = async (req, res, next) => {
     handelTryCatch(req, res, next, async (req, res) => {
-        const { bulkorders } = req?.body || []
-        if (bulkorders.length === 0) {
+        const { bulkorders } = req?.body 
+        if (bulkorders?.length === 0) {
             return errorResponse(res, 400, {
                 message: "Plese create a list of currier orders",
                 ok: false,
                 status: 400
             })
         }
-        const data = await bulkOrderService(bulkorders)
-        if (!data) {
+        const {dbresponses, message, status} = await bulkOrderService(bulkorders)
+        if (!dbresponses) {
             return errorResponse(res, 500, {
                 message: "Internal server error",
+                message,
                 status: 500,
                 data: data
             })
         }
         return successResponse(res, 200, {
             message: 'create currier order list successfuly',
-            status: 500,
+            status: 200,
             ok: true
         })
     })
