@@ -1,5 +1,6 @@
-import { fetchData } from "../../utils/fetch.data"
-import { steadfastConfig, checkCurrierStatus } from "../../config/steadfast/steadfast.api"
+import { fetchData } from "../../utils/fetch.data.js"
+import { steadfastConfig, checkCurrierStatus } from "../../config/steadfast/steadfast.api.js"
+import {insertCurrierModel, getCurrierModel, updateCurrierModel} from "./steadfast.model.js"
 
 const {endpoints: {cteateorder, bulkorders}} = steadfastConfig
 
@@ -9,7 +10,7 @@ export const placingOrderService = async (order) => {
     if(!data)return
     const {consignment:{recipient_phone, consignment_id, invoice, tracking_code, recipient_name, status, note, created_at, updated_at}} = data
     const dbdata = {recipient_name, recipient_phone, consignment_id, invoice, tracking_code, recipient_name, status, note, created_at, updated_at}
-    const dbres = await createCurrierModel(dbdata)
+    const dbres = await insertCurrierModel(dbdata)
     if(!dbres)return
     return dbres
 }
@@ -18,7 +19,7 @@ export const bulkOrderService = async(orders) => {
     const stres = await steadfastApiCall(path, method, orders)
     if(!stres)return
     const dbresponses =  stres?.map(async(currier)=>{
-        const dbdata = await createCurrierModel(currier)
+        const dbdata = await insertCurrierModel(currier)
         return dbdata
     })
     if(!dbresponses)return
@@ -27,8 +28,22 @@ export const bulkOrderService = async(orders) => {
 
 
 
-export const currierStatusService = (search) => { }
-export const webhookService = (currier = {}) => { }
+export const currierStatusService = async(search) => {
+    if(!search){
+        const dbdata = await getCurrierModel()
+        if(!dbdata) return 
+        return dbdata
+    }
+    const dbdata = await getCurrierModel(search)
+    if(!dbdata) return
+    return dbdata
+}
+export const webhookService = async(currier = {}) => { 
+    const dbupadte = {order_id, order_status, tracking_code, updated_at}
+    const dbdata = await updateCurrierModel(dbupadte)
+    if(!dbdata)return
+    return dbdata
+}
 
 
 async function steadfastApiCall(endpoint, method, currier) {

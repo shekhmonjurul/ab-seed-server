@@ -1,5 +1,5 @@
-import { handelTryCatch } from "../../utils/handel.try.catch"
-import { errorResponse, successResponse } from "../../utils/respones"
+import { handelTryCatch } from "../../utils/handel.try.catch.js"
+import { errorResponse, successResponse } from "../../utils/respones.js"
 import { placingOrderService, bulkOrderService, currierStatusService, webhookService } from "./steadfast.service.js"
 
 export const placingOrderControllelr = async (req, res, next) => {
@@ -106,14 +106,8 @@ export const webhookController = (req, res, next) => {
 
 export const currierStatusController = (req, res, next) => {
     handelTryCatch(req, res, next, async (req, res) => {
+        res.json({message: "hi monjurul islam"})
         const { search } = req?.query
-        if (!search) {
-            return errorResponse(res, 400, {
-                ok: false,
-                message: "id / tarcking id/ order id requierd",
-                status: 400
-            })
-        }
         const data = await currierStatusService(search)
         if (!data) {
             return errorResponse(res, 404, {
