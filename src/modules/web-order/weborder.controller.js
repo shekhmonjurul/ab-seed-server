@@ -11,7 +11,8 @@ export const updateWeborder = async (req, res, next) => {
 
 export const getWebOrders = async (req, res, next) => {
   try {
-    const orders = await webOrderService.getOrders();
+    const {page, limit} = req?.query
+    const orders = await webOrderService.getOrders(page, limit);
     res.json({ success: true, data: orders });
   } catch (err) {
     next(err);

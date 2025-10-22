@@ -1,33 +1,20 @@
 import * as OrderModel from "./order.model.js";
 
 export const addOrder = async (data) => {
-  // if (!data?.customer || !data?.product) {
-  //   throw new Error("Customer and product required");
-  // }
-  const neworder = {
-
+  const order = {
+    customer_name: data?.customername || "None",
+    phone: data?.phone || null,
+    address: data?.address || null,
+    note: data?.note || "new order",
+    invoice: data?.invoice || null,
+    subtotal: data?.subtotal,
+    delivery_charge: data?.deliverycharge || null,
+    discount: data?.discount,
+    advance: data?.advance,
+    grand_total: data?.grandtotal || null,
+    items: data?.items,
   }
-  
-  const newOrder = {
-  pid: "P123",
-  orderid: "ORD-456",
-  time: "2025-09-28 15:00:00",
-  orderStatus: "pending",
-  note: "Urgent delivery",
-  code: "XYP-900",
-  site: "example.com",
-  customer: {
-    name: "Rahim",
-    number: "01711111111",
-    address: "Dhaka, Bangladesh"
-  },
-  products: [
-    { productname: "T-Shirt", price: 500 },
-    { productname: "Jeans", price: 1200 }
-  ]
-};
-
-  return await OrderModel.insertOrder(newOrder);
+  return await OrderModel.insertOrder(order);
 };
 
 export const listOrders = async () => {

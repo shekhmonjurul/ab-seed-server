@@ -16,13 +16,13 @@ export const updateOrder = async (data) => {
 
 };
 
-export const getOrders = async () => {
+export const getOrders = async (page, limit) => {
   try {
     // WooCommerce uses Basic Auth
     const orders = await woocomConfig.getAll({
       routename: "orders",
-      limit: 10,
-      page: 1
+      limit: limit,
+      page: page
     })
 
     const orderInfo = orders.map((data, index) => {
@@ -50,8 +50,6 @@ export const getWebOrdersServiceById = async (orderid) => {
   }
   return orderdetais
 }
-
-
 
 
 
