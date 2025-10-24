@@ -38,7 +38,8 @@ export const insertOrder = async (orderData) => {
     );
 
     const orderId = orderResult.insertId;
-
+    const invoice_new = Number(String(orderId).padStart(5, '0')) 
+      await conn.execute("UPDATE orders SET invoice = ? WHERE id = ?", [orderId, invoice_new]);
     // 2️⃣ Insert each order item
     for (const item of items) {
       const [itemResult] = await conn.query(
@@ -48,7 +49,7 @@ export const insertOrder = async (orderData) => {
         [
           orderId,
           item.name,
-          item.product_id,
+          item.product_id || item?.id,
           item.quantity,
           item.price,
           item.subtotal,
