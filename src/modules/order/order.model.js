@@ -38,8 +38,8 @@ export const insertOrder = async (orderData) => {
     );
 
     const orderId = orderResult.insertId;
-    const invoice_new = Number(String(orderId).padStart(5, '0')) 
-      await conn.execute("UPDATE orders SET invoice = ? WHERE id = ?", [orderId, invoice_new]);
+    const invoice_new = Number(String(orderId).padStart(5, '0'))
+    await conn.execute("UPDATE orders SET invoice = ? WHERE id = ?", [orderId, invoice_new]);
     // 2️⃣ Insert each order item
     for (const item of items) {
       const [itemResult] = await conn.query(
@@ -58,18 +58,19 @@ export const insertOrder = async (orderData) => {
       );
 
       const itemId = itemResult.insertId;
-  
+
       // 3️⃣ Insert images for each item
-      console.log("item image type: ", typeof item.image)
+
       if (typeof item.image === "object") {
-         await conn.query(`INSERT INTO item_images (order_item_id, src) VALUES (?, ?)`,
+        await conn.query(`INSERT INTO item_images (order_item_id, src) VALUES (?, ?)`,
           [itemId, item?.image?.src])
-      }else if(Array.isArray(item.image)){
-        for (const img of item.image) {
+      } else if (Array.isArray(item.images)) {
+        for (const img of item.images) {
           await conn.query(
             `INSERT INTO item_images (order_item_id, src) VALUES (?, ?)`,
-            [itemId, img.src]
+            [itemId, item?.images[0]?.src]
           );
+          console.log("image: ", item?.images[0]?.src)
         }
       }
     }
