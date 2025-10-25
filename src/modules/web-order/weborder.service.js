@@ -25,13 +25,15 @@ export const getOrders = async (page, limit) => {
       page: page
     })
 
-    const orderInfo = orders.map((data, index) => {
+    const orderInfo = orders?.data?.map((data, index) => {
       const { id, billing, date_created_gmt, customer_note, line_items, payment_method } = data
       console.log("shippinge lines: ", line_items)
       return { id, billing, date_created_gmt, customer_note, line_items, payment_method }
     })
 
-    return orderInfo
+    console.log("order: ", orders)
+
+    return {orderInfo, page: orders?.pages, rowCount: orders?.rowsCount}
   } catch (err) {
     console.error("Error fetching orders:", err.message);
   }

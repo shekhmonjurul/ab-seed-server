@@ -11,16 +11,16 @@ export const addProductService = async (data) => {
 
 }
 
-export const getProductsService = async () => {
+export const getProductsService = async (page, limit) => {
     try {
         const products = await getAll({
             routename: "products",
-            limit: 10,
-            page: 1
+            limit: limit || 10,
+            page: page || 1
         })
         let productInfos = []
         if (products) {
-            productInfos = products.map((data) => {
+            productInfos = products?.data?.map((data) => {
                 const { id, name, short_description, sku, price, regular_price, sale_price, stock_quantity, categories, images, stock_status } = data
                 return { id, name, short_description, sku, price, regular_price, sale_price, stock_quantity, categories, images, stock_status }
             })
@@ -36,9 +36,10 @@ export const getProductsService = async () => {
 
 export const setcerProducts = async (search) => {
     const routename = `products?search=${encodeURIComponent(search)}&per_page=20`
+    console.log("route name: ", routename)
     const products = await getSingelWoocomConfig(routename)
     if (!products) return
-    const serchdata = products.map((product, index) => {
+    const serchdata = products?.data?.map((product, index) => {
         const { id, name, short_description, sku, price, regular_price, sale_price, stock_quantity, categories, images, stock_status } = product
         return { id, name, short_description, sku, price, regular_price, sale_price, stock_quantity, categories, images, stock_status }
 

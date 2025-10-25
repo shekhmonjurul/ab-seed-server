@@ -2,8 +2,8 @@ import * as productService from "./products.service.js"
 
 export const getProducts = async (req, res, next) => {
     try {
-        const body = req.body
-        const data = await productService.getProductsService()
+        const {page, limit} = req?.query
+        const data = await productService.getProductsService(page, limit)
         if (data) {
             res.status(200).json({
                 mgs: "All Product recive successfuly",
@@ -44,7 +44,7 @@ export const searchProductController = async (req, res, next) => {
             next()
             return
         }
-        console.log(search)
+        console.log(req.url)
         const data = await productService.setcerProducts(search)
         if (!data) res.status(404).json({ mgs: "data not found", sku, data: [] })
         res.status(200).json({ mgs: "recive data all", ok: true, data })

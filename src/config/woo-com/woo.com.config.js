@@ -19,7 +19,7 @@ export const getSingelWoocomConfig = async (route) => {
         throw new Error(`Request failed: ${res.status}`)
     }
     const data = await res.json()
-
+    console.log("data: ", data)
     return data
 }
 
@@ -55,9 +55,8 @@ export async function getAll(urlInfo = {
 
     const allDetails = res.headers.get("x-wp-total")
     const pages = res.headers.get("x-wp-totalpages")
-    console.log("All details: ", allDetails)
-    console.log("pages: ", pages)
+   
 
-    return data
+    return {data, pages, rowsCount: allDetails}
 }
 
