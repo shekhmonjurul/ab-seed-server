@@ -19,7 +19,7 @@ export const getCurrierModel = async (search = "") => {
      OR phone_number = ? 
      OR currier_id = ?
 `
-console.log("sql: ", sql, "search: ", search);
+    console.log("sql: ", sql, "search: ", search);
 
     return query(sql, [search, search, search])
 }
