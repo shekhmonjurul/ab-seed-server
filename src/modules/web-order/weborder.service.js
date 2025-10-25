@@ -22,7 +22,7 @@ export const getOrders = async (page, limit) => {
     const orders = await woocomConfig.getAll({
       routename: "orders",
       limit: limit,
-      page: page + 1
+      page: page
     })
 
     const orderInfo = orders?.data?.map((data, index) => {
