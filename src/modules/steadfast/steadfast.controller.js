@@ -61,7 +61,7 @@ export const placingOrderControllelr = async (req, res, next) => {
 
 export const bulkOrderController = async (req, res, next) => {
     handelTryCatch(req, res, next, async (req, res) => {
-        const { bulkorders } = req?.body 
+        const bulkorders = req?.body
         if (bulkorders?.length === 0) {
             return errorResponse(res, 400, {
                 message: "Plese create a list of currier orders",
@@ -69,7 +69,8 @@ export const bulkOrderController = async (req, res, next) => {
                 status: 400
             })
         }
-        const {dbresponses, message, status} = await bulkOrderService(bulkorders)
+        console.log("body: ", req.body)
+        const { dbresponses, message, status } = await bulkOrderService(bulkorders)
         if (!dbresponses) {
             return errorResponse(res, 500, {
                 message: "Internal server error",
@@ -86,31 +87,31 @@ export const bulkOrderController = async (req, res, next) => {
     })
 }
 export const webhookController = (req, res, next) => {
-    handelTryCatch(req, res, next, async(req, res)=>{
-        const {order_id, order_status, tracking_code, updated_at} = req.body
-        const data = await webhookService({order_id, order_status, tracking_code, updated_at})
-        if(!data){
-           return errorResponse(res, 500, {
+    handelTryCatch(req, res, next, async (req, res) => {
+        const { order_id, order_status, tracking_code, updated_at } = req.body
+        const data = await webhookService({ order_id, order_status, tracking_code, updated_at })
+        if (!data) {
+            return errorResponse(res, 500, {
                 message: "web hook porssing faild",
                 ok: false,
                 status: 500
             })
         }
-       return successResponse(res, 200, {
+        return successResponse(res, 200, {
             message: "web hook prossecing successfuly",
             ok: true,
             status: 200,
             data
         })
     })
- }
+}
 
 export const currierStatusController = (req, res, next) => {
     handelTryCatch(req, res, next, async (req, res) => {
         const { search } = req?.query
         const data = await currierStatusService(search)
         console.log("data: ", data, 'query: ', search);
-        
+
         if (data.length === 0) {
             return errorResponse(res, 404, {
                 message: "Data not found",
