@@ -17,7 +17,7 @@ export const placingOrderControllelr = async (req, res, next) => {
             total_lot,
             delivery_type
         } = req?.body || {}
-
+        console.log("body: ", req.body)
         if (!invoice && !recipient_name && !recipient_phone && !recipient_address && !cod_amount) {
             const json = {
                 message: `invoice, recipientName, recipientPhone, recipientAddress, codAmount are required`,
@@ -41,7 +41,6 @@ export const placingOrderControllelr = async (req, res, next) => {
             total_lot,
             delivery_type
         }
-
         const data = await placingOrderService(body)
         if (!data) {
             return errorResponse(res, 500, {

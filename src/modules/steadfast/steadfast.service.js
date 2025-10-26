@@ -9,11 +9,10 @@ export const placingOrderService = async (order) => {
     const data = await steadfastApiCall(path, method, order)
     if(!data)return
     const {consignment:{recipient_phone, consignment_id, invoice, tracking_code, recipient_name, status, note, created_at, updated_at}} = data
+
     const dbdata = {recipient_name, recipient_phone, consignment_id, invoice, tracking_code, recipient_name, status, note, created_at, updated_at}
     const dbres = await insertCurrierModel(dbdata)
-    if(!dbres)return
-    console.log("data: ", data);
-    
+    if(!dbres)return    
     return dbres
 }
 export const bulkOrderService = async(orders) => { 
