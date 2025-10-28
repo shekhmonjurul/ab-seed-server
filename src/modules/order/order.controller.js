@@ -11,7 +11,9 @@ export const createOrder = async (req, res, next) => {
 
 export const getOrders = async (req, res, next) => {
   try {
-    const orders = await OrderService.listOrders();
+    const {limit, page} = req?.query
+    const offset = (page-1) * limit
+    const orders = await OrderService.listOrders(limit||1, offset||10);
     res.json({ success: true, data: orders });
   } catch (err) {
     next(err);

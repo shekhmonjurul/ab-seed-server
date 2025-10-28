@@ -86,7 +86,7 @@ export const insertOrder = async (orderData) => {
   }
 };
 
-export const getAllOrders = async () => {
+export const getAllOrders = async (limit, offset) => {
   const sql = `
     SELECT 
       o.id AS order_id,
@@ -117,9 +117,10 @@ export const getAllOrders = async () => {
     LEFT JOIN order_items oi ON o.id = oi.order_id
     LEFT JOIN item_images ii ON oi.id = ii.order_item_id
     ORDER BY o.id DESC
+    LIMIT ? OFFSET ?
   `;
 
-  const [rows] = await db.query(sql);
+  const [rows] = await db.query(sql, [limit, offset]);
   if (rows.length === 0) return [];
 
   const orders = [];

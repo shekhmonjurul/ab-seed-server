@@ -17,6 +17,6 @@ export const addOrder = async (data) => {
   return await OrderModel.insertOrder(order);
 };
 
-export const listOrders = async () => {
-  return await OrderModel.getAllOrders();
+export const listOrders = async (limit, offset) => {
+  return await OrderModel.getAllOrders(limit, offset);
 };
