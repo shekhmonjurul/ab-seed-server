@@ -88,39 +88,46 @@ export const insertOrder = async (orderData) => {
 
 export const getAllOrders = async (limit, offset) => {
   const sql = `
-    SELECT 
-      o.id AS order_id,
-      o.customer_name,
-      o.phone,
-      o.address,
-      o.note,
-      o.invoice,
-      o.subtotal,
-      o.delivery_charge,
-      o.discount,
-      o.advance,
-      o.grand_total,
-      o.created_at,
-      
-      oi.id AS order_item_id,
-      oi.name AS item_name,
-      oi.product_id,
-      oi.quantity,
-      oi.price,
-      oi.subtotal AS item_subtotal,
-      oi.update_price,
-      
-      ii.id AS image_id,
-      ii.src AS image_src
-
-    FROM orders o
-    LEFT JOIN order_items oi ON o.id = oi.order_id
-    LEFT JOIN item_images ii ON oi.id = ii.order_item_id
-    ORDER BY o.id DESC
+   SELECT 
+    o.id AS order_id,
+    o.customer_name,
+    o.phone,
+    o.address,
+    o.note,
+    o.invoice,
+    o.subtotal,
+    o.delivery_charge,
+    o.discount,
+    o.advance,
+    o.grand_total,
+    o.created_at,
+    
+    oi.id AS order_item_id,
+    oi.name AS item_name,
+    oi.product_id,
+    oi.quantity,
+    oi.price,
+    oi.subtotal AS item_subtotal,
+    oi.update_price,
+    
+    ii.id AS image_id,
+    ii.src AS image_src
+FROM (
+    SELECT * 
+    FROM orders
+    ORDER BY id DESC
     LIMIT ? OFFSET ?
+) o
+LEFT JOIN order_items oi ON o.id = oi.order_id
+LEFT JOIN item_images ii ON oi.id = ii.order_item_id;
+
   `;
 
+
   const [rows] = await db.query(sql, [limit, offset]);
+  const [[{ total }]] = await db.query(`SELECT COUNT(*) as total FROM orders`);
+  const totalPages = Math.ceil(total / limit);
+  console.log("total pages: ", totalPages, total)
   if (rows.length === 0) return [];
 
   const orders = [];
@@ -147,6 +154,7 @@ export const getAllOrders = async (limit, offset) => {
       orders.push(orderMap.get(row.order_id));
     }
 
+
     const order = orderMap.get(row.order_id);
 
     // 2️⃣ Order item push করার জন্য check
@@ -166,6 +174,7 @@ export const getAllOrders = async (limit, offset) => {
         order.items.push(item);
       }
 
+
       // 3️⃣ Item images push করা
       if (row.image_id) {
         item.images.push({
@@ -175,6 +184,5 @@ export const getAllOrders = async (limit, offset) => {
       }
     }
   }
-
-  return orders;
+  return {orders, totalPages, rowCount: total};
 };

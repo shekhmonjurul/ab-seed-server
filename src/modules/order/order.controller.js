@@ -11,10 +11,13 @@ export const createOrder = async (req, res, next) => {
 
 export const getOrders = async (req, res, next) => {
   try {
-    const {limit, page} = req?.query
+    const page = Number(req?.query?.page) || 1
+    const limit = Number(req?.query?.limit) || 10
+    console.log(page, limit)
     const offset = (page-1) * limit
-    const orders = await OrderService.listOrders(limit||1, offset||10);
-    res.json({ success: true, data: orders });
+    console.log("offset: ", offset)
+    const {orders, totalPages, rowCount} = await OrderService.listOrders(limit, offset);
+    res.json({ success: true, data: orders, totalPages, rowCount });
   } catch (err) {
     next(err);
   }
