@@ -20,3 +20,10 @@ export const addOrder = async (data) => {
 export const listOrders = async (limit, offset) => {
   return await OrderModel.getAllOrders(limit, offset);
 };
+
+
+export const getStatusCountService = async () => await OrderModel.getStatusCountModle()
+
+export const getStatusService  = async (status, limit, offset)=> await OrderModel.getStatusModel(status, limit, offset)
+
+export const updateStatusSevice = async(orderId, status)=> await OrderModel.updateStatusModel(orderId, status)

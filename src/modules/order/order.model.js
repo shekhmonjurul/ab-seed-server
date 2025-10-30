@@ -95,6 +95,9 @@ export const getAllOrders = async (limit, offset) => {
     o.address,
     o.note,
     o.invoice,
+    o.status,
+    o.isprint,
+    o.order_id AS orderId,
     o.subtotal,
     o.delivery_charge,
     o.discount,
@@ -127,7 +130,7 @@ LEFT JOIN item_images ii ON oi.id = ii.order_item_id;
   const [rows] = await db.query(sql, [limit, offset]);
   const [[{ total }]] = await db.query(`SELECT COUNT(*) as total FROM orders`);
   const totalPages = Math.ceil(total / limit);
-  console.log("total pages: ", totalPages, total)
+
   if (rows.length === 0) return [];
 
   const orders = [];
@@ -142,6 +145,9 @@ LEFT JOIN item_images ii ON oi.id = ii.order_item_id;
         phone: row.phone,
         address: row.address,
         note: row.note,
+        status: row.status,
+        orderId: row.orderId,
+        isprint: row.isprint,
         invoice: row.invoice,
         subtotal: row.subtotal,
         delivery_charge: row.delivery_charge,
@@ -184,5 +190,140 @@ LEFT JOIN item_images ii ON oi.id = ii.order_item_id;
       }
     }
   }
-  return {orders, totalPages, rowCount: total};
+  return { orders, totalPages, rowCount: total };
 };
+
+export const getStatusCountModle = async () => {
+  const sql = `SELECT 
+COUNT(status) as number, status
+FROM orders
+GROUP BY status`
+
+  const [row] = await db.query(sql)
+
+  console.log("rows: ", row)
+  return row
+
+}
+
+export const getStatusModel = async (status, limit, offset) => {
+  const sql = `
+    SELECT 
+    o.id AS order_id,
+    o.customer_name,
+    o.phone,
+    o.address,
+    o.note,
+    o.invoice,
+    o.status,
+    o.isprint,
+    o.order_id AS orderId,
+    o.subtotal,
+    o.delivery_charge,
+    o.discount,
+    o.advance,
+    o.grand_total,
+    o.created_at,
+    
+    oi.id AS order_item_id,
+    oi.name AS item_name,
+    oi.product_id,
+    oi.quantity,
+    oi.price,
+    oi.subtotal AS item_subtotal,
+    oi.update_price,
+    
+    ii.id AS image_id,
+    ii.src AS image_src
+FROM (
+    SELECT * 
+    FROM orders
+    WHERE orders.status = ?
+    ORDER BY orders.id DESC
+    LIMIT ? OFFSET ?
+) o
+LEFT JOIN order_items oi ON o.id = oi.order_id
+LEFT JOIN item_images ii ON oi.id = ii.order_item_id;
+  `
+  const [rows] = await db.query(sql, [status, limit, offset])
+  const countSql = `
+  SELECT COUNT(status) as total FROM orders
+  WHERE orders.status = ?
+  `
+  const [[{ total }]] = await db.query(countSql, [status])
+  const totalPage = Math.ceil(total / limit)
+
+  if (rows.length === 0) return [];
+
+  const orders = [];
+  const orderMap = new Map();
+
+  for (const row of rows) {
+    // 1️⃣ Order গুলো map করে push করা
+    if (!orderMap.has(row.order_id)) {
+      orderMap.set(row.order_id, {
+        id: row.order_id,
+        customer_name: row.customer_name,
+        phone: row.phone,
+        address: row.address,
+        note: row.note,
+        status: row.status,
+        orderId: row.orderId,
+        isprint: row.isprint,
+        invoice: row.invoice,
+        subtotal: row.subtotal,
+        delivery_charge: row.delivery_charge,
+        discount: row.discount,
+        advance: row.advance,
+        grand_total: row.grand_total,
+        created_at: row.created_at,
+        items: []
+      });
+      orders.push(orderMap.get(row.order_id));
+    }
+
+
+    const order = orderMap.get(row.order_id);
+
+    // 2️⃣ Order item push করার জন্য check
+    if (row.order_item_id) {
+      let item = order.items.find(i => i.id === row.order_item_id);
+      if (!item) {
+        item = {
+          id: row.order_item_id,
+          name: row.item_name,
+          product_id: row.product_id,
+          quantity: row.quantity,
+          price: row.price,
+          subtotal: row.item_subtotal,
+          update_price: row.update_price,
+          images: []
+        };
+        order.items.push(item);
+      }
+
+
+      // 3️⃣ Item images push করা
+      if (row.image_id) {
+        item.images.push({
+          id: row.image_id,
+          src: row.image_src
+        });
+      }
+    }
+  }
+
+  return { orders, totalPage, rowCount: total }
+}
+
+
+export const updateStatusModel = async (orderId, status) => {
+  const sql = `
+  UPDATE orders
+  set orders.status = ?
+  WHERE id = ?
+  `
+  const [rows] = await db.query(sql, [status, orderId])
+
+  return rows
+}
