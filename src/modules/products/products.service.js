@@ -1,4 +1,5 @@
 import { addWooComConfig, getAll, getSingelWoocomConfig, } from "../../config/woo-com/woo.com.config.js"
+import {insertProductsModel, insertCatagoryModel} from "./products.model.js"
 
 export const addProductService = async (data) => {
     try {
@@ -46,3 +47,7 @@ export const setcerProducts = async (search) => {
     })
     return serchdata
 }
+
+export const addNewProdcutService = async (body)=> await insertProductsModel(body) 
+
+export const addCatagoryService = async (catagory) => await insertCatagoryModel(catagory)
