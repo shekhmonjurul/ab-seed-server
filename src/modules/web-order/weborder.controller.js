@@ -1,5 +1,5 @@
 import * as webOrderService from "./weborder.service.js";
-
+import { response } from "../../utils/respones.js"
 export const updateWeborder = async (req, res, next) => {
   try {
     const result = await webOrderService.updateOrder(req.body);
@@ -11,8 +11,8 @@ export const updateWeborder = async (req, res, next) => {
 
 export const getWebOrders = async (req, res, next) => {
   try {
-    const {page, limit} = req?.query
-    const orders = await webOrderService.getOrders(page, limit);
+    const { page, limit, status } = req?.query
+    const orders = await webOrderService.getOrders(page, limit, status);
     res.json({ success: true, data: orders });
   } catch (err) {
     next(err);
@@ -39,4 +39,10 @@ export const getWeborderbyID = async (req, res, next) => {
     console.log("error: ", error)
     next(error)
   }
+}
+
+export const statusCoutnController = async (req, res) => {
+  const count = await webOrderService.statusCoutnService()
+  if (!count) throw new Error("No counting found")
+  response(res, { data: count })
 }

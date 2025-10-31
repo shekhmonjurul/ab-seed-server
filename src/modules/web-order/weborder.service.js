@@ -16,24 +16,24 @@ export const updateOrder = async (data) => {
 
 };
 
-export const getOrders = async (page, limit) => {
+export const getOrders = async (page, limit, status) => {
   try {
     // WooCommerce uses Basic Auth
-    const orders = await woocomConfig.getAll({
+    const urlInfo = {
       routename: "orders",
-      limit: limit,
-      page: page
-    })
+      page: page || 1,
+      limit: limit || 10,
+      status: status || "processing"
+    }
+    const url = `${urlInfo?.routename}/?status=${urlInfo?.status}&per_page=${urlInfo?.limit}&page=${urlInfo?.page}`
+    const orders = await woocomConfig.getAll(url)
 
     const orderInfo = orders?.data?.map((data, index) => {
-      const { id, billing, date_created_gmt, customer_note, line_items, payment_method } = data
-      console.log("shippinge lines: ", line_items)
-      return { id, billing, date_created_gmt, customer_note, line_items, payment_method }
+      const { id, status, billing, date_created_gmt, customer_note, line_items, payment_method } = data
+      return { id, status, billing, date_created_gmt, customer_note, line_items, payment_method }
     })
 
-    console.log("order: ", orders)
-
-    return {orderInfo, page: orders?.pages, rowCount: orders?.rowsCount}
+    return { orderInfo, page: orders?.pages, rowCount: orders?.rowsCount }
   } catch (err) {
     console.error("Error fetching orders:", err.message);
   }
@@ -43,10 +43,10 @@ export const getOrders = async (page, limit) => {
 export const getWebOrdersServiceById = async (orderid) => {
   const route = `orders/${orderid}`
   const order = await woocomConfig.getSingelWoocomConfig(route)
-  const {id, status, billing, line_items} = await order
+  const { id, status, billing, line_items } = await order
   const orderdetais = {
     id,
-    status, 
+    status,
     billing,
     line_items
   }
@@ -54,6 +54,34 @@ export const getWebOrdersServiceById = async (orderid) => {
 }
 
 
+export const statusCoutnService = async () => {
+  const statuses = [
+    "pending",
+    "processing",
+    "on-hold",
+    "completed",
+    "cancelled",
+    "refunded",
+    "failed"
+  ]
+
+  const urlInfo = {
+    routename: "orders",
+    limit: 10,
+    page: 1,
+  }
+
+  const result = {}
+
+  for (const status of statuses) {
+    const url = `${urlInfo?.routename}/?status=${status}&per_page=${urlInfo?.limit}&page=${urlInfo?.page}`
+    const res = await woocomConfig.getAll(url)
+    result[status] = res?.rowsCount
+  }
+
+  return result
+
+}
 
 
 
