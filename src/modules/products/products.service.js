@@ -1,5 +1,5 @@
 import { addWooComConfig, getAll, getSingelWoocomConfig, } from "../../config/woo-com/woo.com.config.js"
-import {insertProductsModel, insertCatagoryModel} from "./products.model.js"
+import { insertProductsModel, insertCatagoryModel } from "./products.model.js"
 
 export const addProductService = async (data) => {
     try {
@@ -48,6 +48,19 @@ export const setcerProducts = async (search) => {
     return serchdata
 }
 
-export const addNewProdcutService = async (body)=> await insertProductsModel(body) 
+export const addNewProdcutService = async (body, files = []) => {
 
+    // main_image,
+    // product_photos
+    const main_image = `http://localhost:5000/products/images/${files[0]?. filename}`
+    let product_photos = files.slice(1)
+    product_photos = product_photos.map(photo=>({src: `http://localhost:5000/products/images/${photo.filename}`}))
+
+    const newProduct = {
+        ...body,
+        main_image,
+        product_photos
+    }
+    return await insertProductsModel(newProduct)
+}
 export const addCatagoryService = async (catagory) => await insertCatagoryModel(catagory)

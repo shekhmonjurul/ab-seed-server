@@ -1,5 +1,7 @@
 import * as productService from "./products.service.js"
 import { response } from "../../utils/respones.js"
+import throwError from "../../utils/throwError.js"
+
 export const getProducts = async (req, res, next) => {
     try {
         const { page, limit } = req?.query
@@ -56,26 +58,35 @@ export const searchProductController = async (req, res, next) => {
 
 export const addProductController = async (req, res) => {
     const body = req?.body
-    if (!body) {
-        throw new Error("All data ar required")
-    }
-    const result = await productService.addNewProdcutService(body)
-    if (!result) {
-        throw new Error("Add product faild")
+    const files = req?.files
+
+    const keys = Object.keys(body || {})
+
+    for (const key of keys) {
+
+        if (key !== "long_description" && key !== "category" && key !== "category_id") {
+              throwError(!body[key], `${key} field ar requied`)
+        }
+      
     }
 
+    throwError(!files[0], "prodcut iamege ar requied")
+
+    const result = await productService.addNewProdcutService(body, files || [])
+
+    throwError(!result, "Add product faild")
     response(res, { data: result })
 }
 
-export const addCatagoryController = async (req, res)=>{
+export const addCatagoryController = async (req, res) => {
     const catagory = req?.body.catagory
-    if(!catagory){
+    if (!catagory) {
         throw new Error("Catagory Need")
     }
 
     const result = await productService.addCatagoryService(catagory)
-    if(!result){
+    if (!result) {
         throw new Error("Catagory add faild")
     }
-    response(res, {data: result})
+    response(res, { data: result })
 }
