@@ -17,7 +17,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
-app.use("/products/images/", express.static("./src/upload"))
+app.use("/products/images", express.static("./src/upload/produts/image"))
 
 // Home route
 app.get("/", (req, res) => {

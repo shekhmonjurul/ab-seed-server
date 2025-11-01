@@ -7,6 +7,7 @@ const router = Router()
 
 
 router.get("/", searchProductController, getProducts)
+
 // router.post("/", addProduct)
 router.post("/add", fileUpload.array("files"), asyncHandler(addProductController))
 router.post("/catagory", asyncHandler(addCatagoryController))
