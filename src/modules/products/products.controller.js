@@ -1,7 +1,7 @@
 import * as productService from "./products.service.js"
 import { response } from "../../utils/respones.js"
 import throwError from "../../utils/throwError.js"
-
+import {getSingelProdcutsModel} from "./products.model.js"
 export const getProducts = async (req, res, next) => {
     try {
         const { page, limit } = req?.query
@@ -65,9 +65,9 @@ export const addProductController = async (req, res) => {
     for (const key of keys) {
 
         if (key !== "long_description" && key !== "category" && key !== "category_id") {
-              throwError(!body[key], `${key} field ar requied`)
+            throwError(!body[key], `${key} field ar requied`)
         }
-      
+
     }
 
     throwError(!files[0], "prodcut iamege ar requied")
@@ -89,4 +89,14 @@ export const addCatagoryController = async (req, res) => {
         throw new Error("Catagory add faild")
     }
     response(res, { data: result })
+}
+
+export const getProductsContorller = async (req, res) => {
+    const page = Number(req?.query?.page) || 1
+    const limit = Number(req?.query?.limit) || 10
+    const id = req?.query.id
+    let products = id ? await getSingelProdcutsModel(id) : await productService.AllProductsService(page, limit)
+
+    throwError(!products, "Plese try againe")
+    response(res, { data: products })
 }

@@ -3,86 +3,233 @@ import { productsdbConfig } from "../../config/database/products/products.databa
 const db = dbConectionFunction(productsdbConfig)
 
 export const insertProductsModel = async (product) => {
-    const conn = await db.getConnection();
-    try {
-        await conn.beginTransaction();
-        const {
-            product_name,
-            sku,
-            short_description,
-            long_description,
-            category,
-            reguler_price,
-            sale_price,
-            stock,
-            category_id,
-            main_image,
-            product_photos
+  const conn = await db.getConnection();
+  try {
+    await conn.beginTransaction();
+    const {
+      product_name,
+      sku,
+      short_description,
+      long_description,
+      category,
+      reguler_price,
+      sale_price,
+      stock,
+      category_id,
+      main_image,
+      product_photos
 
-        } = product
-        // 1. Insert into products
-        const [orderResult] = await conn.query(
-            `INSERT INTO products
+    } = product
+    // 1. Insert into products
+    const [orderResult] = await conn.query(
+      `INSERT INTO products
        (product_name, sku, short_description, long_description, category, reguler_price, sale_price, stock, category_id, main_image)
        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-            [
-                product_name,
-                sku,
-                short_description,
-                long_description,
-                category,
-                reguler_price,
-                sale_price,
-                stock,
-                category_id,
-                main_image
-            ]
-        );
+      [
+        product_name,
+        sku,
+        short_description,
+        long_description,
+        category,
+        reguler_price,
+        sale_price,
+        stock,
+        category_id,
+        main_image
+      ]
+    );
 
-        const orderId = orderResult.insertId;
+    const orderId = orderResult.insertId;
 
-        // 2️⃣ Insert each product photos
-        for (const photo of product_photos) {
-            const [itemResult] = await conn.query(
-                `INSERT INTO product_photos 
+    // 2️⃣ Insert each product photos
+    for (const photo of product_photos) {
+      const [itemResult] = await conn.query(
+        `INSERT INTO product_photos 
          (product_id, src)
          VALUES (?, ?)`,
-                [
-                    orderId,
-                    photo?.src
-                ]
-            );
+        [
+          orderId,
+          photo?.src
+        ]
+      );
 
-            const itemId = itemResult.insertId;
-        }
-
-        await conn.commit();
-        console.log("Order Inserted Successfully ✅");
-        return orderResult
-    } catch (err) {
-        await conn.rollback();
-        console.error("Insert Failed ❌", err);
-    } finally {
-        conn.release();
+      const itemId = itemResult.insertId;
     }
+
+    await conn.commit();
+    console.log("Order Inserted Successfully ✅");
+    return orderResult
+  } catch (err) {
+    await conn.rollback();
+    console.error("Insert Failed ❌", err);
+  } finally {
+    conn.release();
+  }
 }
 
 
 export const insertCatagoryModel = async (catagory) => {
 
-    const sql = `
+  const sql = `
     INSERT INTO order_items 
     (category_name)
     VALUES (?)
     `
 
-    const [rows] = await db.query(sql, [catagory])
+  const [rows] = await db.query(sql, [catagory])
 
-    return rows
+  return rows
 
 }
 
 
+export const getAllProdcutsModel = async (limit, offset) => {
+  const sql = `
+ 
+    SELECT 
+      pro.id,
+      pro.product_name,
+      pro.sku,
+      pro.short_description,
+      pro.long_description,
+      pro.category,
+      pro.reguler_price,
+      pro.sale_price,
+      pro.stock,
+      pro.category_id,
+      pro.main_image,
+      
+      pto.id AS photo_id,
+      pto.src
+    FROM (
+      SELECT * 
+      FROM products
+      ORDER BY products.id DESC
+      LIMIT ? OFFSET ?
+    ) pro
+    LEFT JOIN product_photos pto ON pro.id = pto.product_id
+  
+  `;
+
+  const [rows] = await db.query(sql, [limit, offset]);
+
+  const countSql = `SELECT COUNT(*) AS total FROM products`;
+  const [[{ total }]] = await db.query(countSql);
+
+  const totalPage = Math.ceil(total / limit);
+
+  if (rows.length === 0) return { products: [], totalPage, rowCount: 0 };
+
+  const products = [];
+  const productMap = new Map();
+
+  for (const row of rows) {
+    // Create product if not already mapped
+    if (!productMap.has(row.id)) {
+      productMap.set(row.id, {
+        id: row.id,
+        product_name: row.product_name,
+        sku: row.sku,
+        short_description: row.short_description,
+        long_description: row.long_description,
+        category: row.category,
+        category_id: row.category_id,
+        reguler_price: row.reguler_price,
+        sale_price: row.sale_price,
+        stock: row.stock,
+        main_image: row.main_image,
+        product_photos: []
+      });
+      products.push(productMap.get(row.id));
+    }
+
+    const product = productMap.get(row.id);
+
+    // Push photo if exists
+    if (row.photo_id && row.src) {
+      const exists = product.product_photos.find(p => p.id === row.photo_id);
+      if (!exists) {
+        product.product_photos.push({
+          id: row.photo_id,
+          src: row.src
+        });
+      }
+    }
+  }
+
+  return { products, totalPage, rowCount: total };
+}
+
+export const getSingelProdcutsModel = async (id) => {
+  const sql = `
+ 
+    SELECT 
+      pro.id,
+      pro.product_name,
+      pro.sku,
+      pro.short_description,
+      pro.long_description,
+      pro.category,
+      pro.reguler_price,
+      pro.sale_price,
+      pro.stock,
+      pro.category_id,
+      pro.main_image,
+      
+      pto.id AS photo_id,
+      pto.src
+    FROM (
+      SELECT * 
+      FROM products
+      WHERE products.id = ?
+      ORDER BY products.id DESC
+    ) pro
+    LEFT JOIN product_photos pto ON pro.id = pto.product_id
+  `;
+
+  const [rows] = await db.query(sql, [id]);
+
+  if (rows.length === 0) return { products: [], totalPage, rowCount: 0 };
+
+  const products = [];
+  const productMap = new Map();
+
+  for (const row of rows) {
+    // Create product if not already mapped
+    if (!productMap.has(row.id)) {
+      productMap.set(row.id, {
+        id: row.id,
+        product_name: row.product_name,
+        sku: row.sku,
+        short_description: row.short_description,
+        long_description: row.long_description,
+        category: row.category,
+        category_id: row.category_id,
+        reguler_price: row.reguler_price,
+        sale_price: row.sale_price,
+        stock: row.stock,
+        main_image: row.main_image,
+        product_photos: []
+      });
+      products.push(productMap.get(row.id));
+    }
+
+    const product = productMap.get(row.id);
+
+    // Push photo if exists
+    if (row.photo_id && row.src) {
+      const exists = product.product_photos.find(p => p.id === row.photo_id);
+      if (!exists) {
+        product.product_photos.push({
+          id: row.photo_id,
+          src: row.src
+        });
+      }
+    }
+  }
+
+  return { products };
+}
 
 
 // CREATE TABLE products (
@@ -112,3 +259,5 @@ export const insertCatagoryModel = async (catagory) => {
 //     category_name VARCHAR(255) NOT NULL,
 //     datetime DATETIME DEFAULT CURRENT_TIMESTAMP
 // );
+
+
