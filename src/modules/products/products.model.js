@@ -232,6 +232,16 @@ export const getSingelProdcutsModel = async (id) => {
 }
 
 
+export const updateProductModel = async (keys, values) => {
+  const sql = `
+  UPDATE products
+  SET ${keys}
+  WHERE id = ?
+`
+  const [result] = await db.query(sql, [...values])
+  return result
+}
+
 // CREATE TABLE products (
 //     id INT AUTO_INCREMENT PRIMARY KEY,
 //     productName VARCHAR(255) NOT NULL,

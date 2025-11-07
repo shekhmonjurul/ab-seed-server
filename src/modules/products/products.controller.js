@@ -100,3 +100,11 @@ export const getProductsContorller = async (req, res) => {
     throwError(!products, "Plese try againe")
     response(res, { data: products })
 }
+export const updateProductContorller = async (req, res)=>{
+    const  body = req?.body
+    const id = req?.body?.id
+    throwError(!id, "id required")
+    const data = await productService.updateProductService(body)
+    response(res, {data: data})
+
+}

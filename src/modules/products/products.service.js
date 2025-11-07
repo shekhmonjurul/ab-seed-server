@@ -1,5 +1,5 @@
 import { addWooComConfig, getAll, getSingelWoocomConfig, } from "../../config/woo-com/woo.com.config.js"
-import { insertProductsModel, insertCatagoryModel, getAllProdcutsModel } from "./products.model.js"
+import { insertProductsModel, insertCatagoryModel, getAllProdcutsModel, updateProductModel } from "./products.model.js"
 
 export const addProductService = async (data) => {
     try {
@@ -52,9 +52,9 @@ export const addNewProdcutService = async (body, files = []) => {
 
     // main_image,
     // product_photos
-    const main_image = `http://localhost:5000/products/images/${files[0]?. filename}`
+    const main_image = `http://localhost:5000/products/images/${files[0]?.filename}`
     let product_photos = files.slice(1)
-    product_photos = product_photos.map(photo=>({src: `http://localhost:5000/products/images/${photo.filename}`}))
+    product_photos = product_photos.map(photo => ({ src: `http://localhost:5000/products/images/${photo.filename}` }))
 
     const newProduct = {
         ...body,
@@ -65,8 +65,29 @@ export const addNewProdcutService = async (body, files = []) => {
 }
 export const addCatagoryService = async (catagory) => await insertCatagoryModel(catagory)
 
-export const AllProductsService = async (page, limit)=>{
-    const offset = (page-1) * limit
+export const AllProductsService = async (page, limit) => {
+    const offset = (page - 1) * limit
     const products = await getAllProdcutsModel(limit, offset)
     return products
+}
+
+
+export const updateProductService = async (body) => {
+
+    let keys = []
+    let values = []
+
+    if (typeof body === "object") {
+        for (let key in body) {
+            values.push(body[key])
+            if (key === "id") break
+            keys.push(`${key}=?`)
+        }
+    }
+
+    keys = keys.join(",")
+
+    const result = await updateProductModel(keys, values)
+    return result
+
 }
