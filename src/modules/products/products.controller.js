@@ -91,6 +91,14 @@ export const addCatagoryController = async (req, res) => {
     response(res, { data: result })
 }
 
+export const getAllCatagoryController = async (req, res)=>{
+    const limit = req?.query?.limit || 10
+    const page = req?.query?.page || 1
+    const result = await productService.getAllCatagoryService(limit, page)
+    throwError(!result, "catagory note found")
+    response(res, {data: result})
+}
+
 export const getProductsContorller = async (req, res) => {
     const page = Number(req?.query?.page) || 1
     const limit = Number(req?.query?.limit) || 10

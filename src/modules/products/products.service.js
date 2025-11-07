@@ -1,5 +1,5 @@
 import { addWooComConfig, getAll, getSingelWoocomConfig, } from "../../config/woo-com/woo.com.config.js"
-import { insertProductsModel, insertCatagoryModel, getAllProdcutsModel, updateProductModel } from "./products.model.js"
+import { insertProductsModel, insertCatagoryModel, getAllProdcutsModel, updateProductModel, getAllCatagoryModel} from "./products.model.js"
 
 export const addProductService = async (data) => {
     try {
@@ -90,4 +90,10 @@ export const updateProductService = async (body) => {
     const result = await updateProductModel(keys, values)
     return result
 
+}
+
+export const getAllCatagoryService = async (limit, page) => {
+    const offset = (page-1) * limit
+    const result = await getAllCatagoryModel(limit, offset) 
+    return result
 }

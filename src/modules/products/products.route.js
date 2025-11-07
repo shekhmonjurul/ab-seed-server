@@ -1,5 +1,5 @@
 import { Router } from "express"
-import { getProducts, addProduct, searchProductController, addProductController, addCatagoryController, getProductsContorller, updateProductContorller } from "./products.controller.js"
+import { getProducts, addProduct, searchProductController, addProductController, addCatagoryController, getProductsContorller, updateProductContorller, getAllCatagoryController } from "./products.controller.js"
 import { asyncHandler } from "../../utils/asyncHandler.js"
 import fileUpload from "../../config/file_upload/file.upload.config.js"
 
@@ -12,5 +12,6 @@ router.get("/", searchProductController, getProducts)
 router.get("/get", asyncHandler(getProductsContorller))
 router.post("/add", fileUpload.array("files"), asyncHandler(addProductController))
 router.post("/catagory", asyncHandler(addCatagoryController))
+router.get("/catagory", asyncHandler(getAllCatagoryController))
 router.post("/update", asyncHandler(updateProductContorller))
 export default router

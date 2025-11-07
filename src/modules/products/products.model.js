@@ -67,22 +67,6 @@ export const insertProductsModel = async (product) => {
   }
 }
 
-
-export const insertCatagoryModel = async (catagory) => {
-
-  const sql = `
-    INSERT INTO order_items 
-    (category_name)
-    VALUES (?)
-    `
-
-  const [rows] = await db.query(sql, [catagory])
-
-  return rows
-
-}
-
-
 export const getAllProdcutsModel = async (limit, offset) => {
   const sql = `
  
@@ -242,6 +226,44 @@ export const updateProductModel = async (keys, values) => {
   return result
 }
 
+
+export const insertCatagoryModel = async (catagory) => {
+
+  const sql = `
+    INSERT INTO category
+    (category_name)
+    VALUES (?)
+    `
+
+  const [rows] = await db.query(sql, [catagory])
+
+  return rows
+
+}
+
+
+export const getAllCatagoryModel = async (limit, offset) => {
+
+  const sql = `
+    SELECT *
+    FROM category
+    LIMIT ? OFFSET ?
+  `
+  const [rows] = await db.query(sql, [limit, offset]);
+
+  const countSql = `SELECT COUNT(*) AS total FROM category`;
+  const [[{ total }]] = await db.query(countSql);
+
+  const totalPage = Math.ceil(total / limit);
+
+  return { rows, page: totalPage, rowCount: total }
+}
+
+
+
+
+
+
 // CREATE TABLE products (
 //     id INT AUTO_INCREMENT PRIMARY KEY,
 //     productName VARCHAR(255) NOT NULL,
@@ -269,5 +291,3 @@ export const updateProductModel = async (keys, values) => {
 //     category_name VARCHAR(255) NOT NULL,
 //     datetime DATETIME DEFAULT CURRENT_TIMESTAMP
 // );
-
-
