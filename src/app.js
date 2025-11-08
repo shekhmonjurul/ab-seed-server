@@ -9,7 +9,8 @@ import weborderRoute from "./modules/web-order/weborder.route.js"
 import productRoute from "./modules/products/products.route.js"
 import searchRoute from "./modules/search/search.route.js"
 import steadfastRoute from "./modules/steadfast/steadfast.route.js"
-
+import LoginRouter from "./modules/user/user.route.js"
+import { registerHooks } from "module";
 const app = express();
 
 
@@ -41,6 +42,9 @@ app.use("/api/filter/", searchRoute)
 
 // steadfast api 
 app.use("/api/steadfast/", steadfastRoute)
+
+// loging api
+app.use("/loging", LoginRouter)
 
 // Error handling
 app.use(errorMiddleware);

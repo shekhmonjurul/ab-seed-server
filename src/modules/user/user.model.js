@@ -1,6 +1,6 @@
-import { use } from "react"
-import { userDbConfig } from "../../config/database/user/user.database.config"
-import dbConectionFunction from "../../utils/dbContectionFuntion"
+
+import { userDbConfig } from "../../config/database/user/user.database.config.js"
+import dbConectionFunction from "../../utils/dbContectionFuntion.js"
 
 const db = dbConectionFunction(userDbConfig)
 
@@ -17,13 +17,23 @@ const db = dbConectionFunction(userDbConfig)
 // const [row] = await db.execute(userSql)
 
 
-const isertUserModel = async (user={}) => {
-
+export const isertUserModel = async (name, password, role, employeId) => {
     const sql = `
     INSERT INTO users 
     (name, role, employeeId, password)
     VALUES (?, ?, ?, ?)
     `
-    const [row] = await db.execute(sql, [user?.name, user?.role, user?.employeeId, user?.passwrod])
+    const [row] = await db.execute(sql, [name, role, employeId, password])
+
+
     return row
+}
+
+export const getUserModel = async (employeeId) => {
+    const sql = `
+    SELECT * FROM users
+    WHERE employeeId=? 
+    `
+    const [reslut] = await db.query(sql, [employeeId])
+    return reslut
 }
