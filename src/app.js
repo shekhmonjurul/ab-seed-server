@@ -44,7 +44,7 @@ app.use("/api/filter/", searchRoute)
 app.use("/api/steadfast/", steadfastRoute)
 
 // loging api
-app.use("/loging", LoginRouter)
+app.use("/user", LoginRouter)
 
 // Error handling
 app.use(errorMiddleware);
