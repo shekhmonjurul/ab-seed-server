@@ -21,5 +21,4 @@ const initDB = async () => {
     }
 }
 
-
 initDB()
