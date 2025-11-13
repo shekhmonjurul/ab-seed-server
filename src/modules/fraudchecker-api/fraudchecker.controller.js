@@ -1,27 +1,14 @@
-import * as fraudService from "./fraudchecker.service.js"
+import throwError from "../../utils/throwError.js"
+import { response } from "../../utils/respones.js"
+import { addAndGetFraudService } from "./fraudchecker.service.js"
 
-export const getFraudchecker = async (req, res, next) => {
-    try {
-        const body = req?.body
-        const currire = await fraudService.getFraud(body);
-        // const currire = await res_currire.json()
-        res.status(201).json({ success: true, currire });
-    } catch (err) {
-        next(err);
-    }
-};
-
-
-
-
-export const addFraudchecker = async (req, res, next) => {
-    try {
-        const body = req?.body 
-        const reslut = await fraudService.addFraud(body)
-        res.status(201).json({ success: true, reslut })
-    } catch (err) {
-        next(err)
-    }
-
+export const addAndGetFraudController = async (req, res) => {
+    const phone = req?.query?.phone
+    throwError(!phone, "phone number are required")
+    const data = await addAndGetFraudService(phone)
+    throwError(!data, "frud ar not found")
+    response(res, {
+        data: data
+    })
 }
 

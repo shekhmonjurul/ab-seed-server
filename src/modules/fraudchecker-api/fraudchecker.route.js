@@ -1,10 +1,9 @@
 import { Router } from "express";
-import * as fraudContorller from "./fraudchecker.controller.js"
-
+import {asyncHandler} from "../../utils/asyncHandler.js"
+import {addAndGetFraudController} from "./fraudchecker.service.js"
 
 const router = Router();
 
-router.get("/", fraudContorller.getFraudchecker);
-router.post("/", fraudContorller.addFraudchecker)
+router.get("/", asyncHandler(addAndGetFraudController));
 
 export default router;

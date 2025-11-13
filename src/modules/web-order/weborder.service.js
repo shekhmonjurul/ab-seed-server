@@ -1,4 +1,5 @@
 import * as woocomConfig from "../../config/woo-com/woo.com.config.js";
+import throwError from "../../utils/throwError.js";
 import * as WebOrderModel from "./weborder.model.js";
 
 export const updateOrder = async (data) => {
@@ -81,6 +82,11 @@ export const statusCoutnService = async () => {
 
   return result
 
+}
+
+
+export const createWebOrderService = async (order)=>{
+  
 }
 
 

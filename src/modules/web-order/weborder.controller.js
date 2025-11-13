@@ -1,5 +1,6 @@
 import * as webOrderService from "./weborder.service.js";
 import { response } from "../../utils/respones.js"
+import throwError from "../../utils/throwError.js";
 export const updateWeborder = async (req, res, next) => {
   try {
     const result = await webOrderService.updateOrder(req.body);
@@ -45,4 +46,29 @@ export const statusCoutnController = async (req, res) => {
   const count = await webOrderService.statusCoutnService()
   if (!count) throw new Error("No counting found")
   response(res, { data: count })
+}
+
+
+export const createWebOrderController = async (req, res) => {
+  const body = req?.body || {}
+  const order = {
+    customer_name: body?.customername || "None",
+    phone: body?.phone || null,
+    address: body?.address || null,
+    note: body?.note || "new order",
+    invoice: body?.invoice || null,
+    subtotal: body?.subtotal,
+    delivery_charge: body?.deliverycharge || null,
+    discount: body?.discount,
+    advance: body?.advance,
+    grand_total: body?.grandtotal || null,
+    items: body?.items,
+  }
+
+  const result = await webOrderService.createWebOrderService(order)
+
+  throwError(!result, "Order create faild")
+  response(res, {
+    data: result
+  })
 }
