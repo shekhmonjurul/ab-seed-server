@@ -143,11 +143,28 @@ const createOrderService = async (orderData) => {
   return order
 }
 
+// update print status true or false
+const updatePrintStatusService = async (orderId) => {
+  const isPrint = await Order.update(
+    {
+      isprint: true
+    },
+    {
+      where: {
+        order_id: orderId
+      }
+    }
+  )
+
+  return isPrint
+}
+
 
 export default {
   createOrderService,
   updateStatusSevice,
   getOrderService,
   getOrderServiceByStatus,
-  getStatusCountService
+  getStatusCountService,
+  updatePrintStatusService
 }

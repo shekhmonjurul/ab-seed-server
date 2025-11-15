@@ -7,7 +7,8 @@ const {
   updateStatusSevice,
   getOrderService,
   getOrderServiceByStatus,
-  getStatusCountService
+  getStatusCountService,
+  updatePrintStatusService
 } = orderService
 
 
@@ -49,14 +50,25 @@ const createOrderController = async (req, res) => {
   throwError(!data, "Order create faild")
   response(res, {
     data: data
-  })
+  }, 201)
 
 }
 
+// update print status true or false
+const updatePrintStatusController = async (req, res) => {
+  const orderId = req?.query?.order_id
+  throwError(!orderId, "Order Id are requried")
+  const isprint = await updatePrintStatusService(orderId)
+  throwError(!isprint, "Printing faild")
+  response(res, {
+    data: isprint
+  })
+}
 
 export default {
   createOrderController,
   updateStatusContorller,
   getOrderController,
-  statusCountController
+  statusCountController,
+  updatePrintStatusController
 }

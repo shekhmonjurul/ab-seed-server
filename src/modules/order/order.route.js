@@ -6,7 +6,8 @@ const {
     createOrderController,
     updateStatusContorller,
     getOrderController,
-    statusCountController
+    statusCountController,
+    updatePrintStatusController
 } = orderController
 
 const router = Router();
@@ -15,5 +16,6 @@ router.get("/", asyncHandler(getOrderController));
 router.get("/status_count", asyncHandler(statusCountController))
 router.post("/create", asyncHandler(createOrderController))
 router.post("/update_status", asyncHandler(updateStatusContorller))
+router.put("/printing", asyncHandler(updatePrintStatusController))
 
 export default router;
