@@ -1,8 +1,8 @@
 
-import { userDbConfig } from "../../config/database/user/user.database.config.js"
+// import { userDbConfig } from "../../config/database/user/user.database.config.js"
 import dbConectionFunction from "../../utils/dbContectionFuntion.js"
 
-const db = dbConectionFunction(userDbConfig)
+// const db = dbConectionFunction(userDbConfig)
 
 // const userSql = `
 //     CREATE TABLE IF NOT EXISTS users (

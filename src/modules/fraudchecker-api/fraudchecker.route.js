@@ -1,6 +1,9 @@
 import { Router } from "express";
 import {asyncHandler} from "../../utils/asyncHandler.js"
-import {addAndGetFraudController} from "./fraudchecker.service.js"
+import fraudService from "./fraudchecker.service.js"
+
+
+const {addAndGetFraudController} = fraudService
 
 const router = Router();
 

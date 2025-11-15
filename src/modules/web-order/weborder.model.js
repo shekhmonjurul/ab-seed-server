@@ -1,4 +1,4 @@
-import db from "../../config/database/fraud/database.js";
+// import db from "../../config/database/fraud/database.js";
 
 export const updateOrder = async (data) => {
   const sql = `INSERT INTO weborders (customerid,	time,	customerStatus,	customer,	note,	products,	successRate,	tags,	site) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`

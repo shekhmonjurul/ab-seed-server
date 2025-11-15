@@ -1,16 +1,21 @@
 import fetchData from "../../utils/fetch.data.js"
-import {
-    FraudCheckerModel,
-    FraudCourierHistoryModel
-} from "./fraudchecker.model.js"
 
-import {
-    fraudEndPoint,
-    fraudApiOtion
-} from "../../config/fraud/fraud.config.js"
+import fraudConfig from "../../config/fraud/fraud.config.js"
 
 import throwError from "../../utils/throwError.js"
 
+import fraudModel from "../../../models/index.js"
+
+
+const {
+    FraudCheckerModel,
+    FraudCourierHistoryModel
+} = fraudModel
+
+const {
+    fraudEndPoint,
+    fraudApiOtion
+} = fraudConfig
 
 async function addAndGetFraudService(phone) {
     let isFraud = await isHaveFraud(phone)

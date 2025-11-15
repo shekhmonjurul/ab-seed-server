@@ -1,6 +1,6 @@
 import dbConectionFunction from "../../utils/dbContectionFuntion.js"
-import { productsdbConfig } from "../../config/database/products/products.database.config.js"
-const db = dbConectionFunction(productsdbConfig)
+// import { productsdbConfig } from "../../config/database/products/products.database.config.js"
+// const db = dbConectionFunction(productsdbConfig)
 
 export const insertProductsModel = async (product) => {
   const conn = await db.getConnection();

@@ -1,6 +1,9 @@
 import { response } from "../../utils/respones.js";
 import throwError from "../../utils/throwError.js";
 import { loginService, registationServer } from "./user.service.js"
+import Models from "../../../models/index.js"
+
+const {User} = Models
 
 
 export let registrationController = async (req, res) => {
@@ -30,6 +33,23 @@ export const loginController = async (req, res) => {
     response(res, { data: token })
 }
 
+
+export const createUserContoller = async (req, res)=>{
+    const {name, email, password} = req?.body
+    console.log("name: ", name, "email: ", email, "password: ", password)
+    const user = await User.create({
+        name: name,
+        email: email,
+        password: password
+    })
+
+    console.log("user: ", user)
+
+    response(res, {
+        data: user
+    })
+
+}
 
 
 

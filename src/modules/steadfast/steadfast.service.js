@@ -1,4 +1,4 @@
-import { fetchData } from "../../utils/fetch.data.js"
+import  fetchData  from "../../utils/fetch.data.js"
 import { steadfastConfig, checkCurrierStatus } from "../../config/steadfast/steadfast.api.js"
 import {insertCurrierModel, getCurrierModel, updateCurrierModel} from "./steadfast.model.js"
 
