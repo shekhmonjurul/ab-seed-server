@@ -258,36 +258,3 @@ export const getAllCatagoryModel = async (limit, offset) => {
 
   return { rows, page: totalPage, rowCount: total }
 }
-
-
-
-
-
-
-// CREATE TABLE products (
-//     id INT AUTO_INCREMENT PRIMARY KEY,
-//     productName VARCHAR(255) NOT NULL,
-//     sku VARCHAR(100) UNIQUE NOT NULL,
-//     shortDescription TEXT,
-//     longDescription TEXT,
-//     category VARCHAR(100),
-//     regulerPrice DECIMAL(10,2),
-//     salePrice DECIMAL(10,2),
-//     stock INT DEFAULT 0,
-//     category_id INT,
-//     mainImage VARCHAR(255),
-//     date_time DATETIME DEFAULT CURRENT_TIMESTAMP
-// );
-
-
-// CREATE TABLE product_photos (
-//     id INT AUTO_INCREMENT PRIMARY KEY,
-//     product_id INT NOT NULL,
-//     src VARCHAR(255) NOT NULL,
-//     FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
-// );
-// CREATE TABLE IF NOT EXISTS category (
-//     id INT AUTO_INCREMENT PRIMARY KEY,
-//     category_name VARCHAR(255) NOT NULL,
-//     datetime DATETIME DEFAULT CURRENT_TIMESTAMP
-// );
