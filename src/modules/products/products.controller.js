@@ -1,9 +1,7 @@
 import * as productService from "./products.service.js"
 import { response } from "../../utils/respones.js"
 import throwError from "../../utils/throwError.js"
-import { getSingelProdcutsModel } from "./products.model.js"
-import requestBodyRequiredCheckFunction from "../../utils/requestBodyRequiredCheckFunction.js"
-
+import {getSingelProdcutsModel} from "./products.model.js"
 export const getProducts = async (req, res, next) => {
     try {
         const { page, limit } = req?.query
@@ -62,8 +60,15 @@ export const addProductController = async (req, res) => {
     const body = req?.body
     const files = req?.files
 
+    const keys = Object.keys(body || {})
 
-    requestBodyRequiredCheckFunction(body, `(key !== "long_description" && key !== "category" && key !== "category_id")`, throwError)
+    for (const key of keys) {
+
+        if (key !== "long_description" && key !== "category" && key !== "category_id") {
+            throwError(!body[key], `${key} field ar requied`)
+        }
+
+    }
 
     throwError(!files[0], "prodcut iamege ar requied")
 
@@ -86,12 +91,12 @@ export const addCatagoryController = async (req, res) => {
     response(res, { data: result })
 }
 
-export const getAllCatagoryController = async (req, res) => {
+export const getAllCatagoryController = async (req, res)=>{
     const limit = req?.query?.limit || 10
     const page = req?.query?.page || 1
     const result = await productService.getAllCatagoryService(limit, page)
     throwError(!result, "catagory note found")
-    response(res, { data: result })
+    response(res, {data: result})
 }
 
 export const getProductsContorller = async (req, res) => {
@@ -103,11 +108,11 @@ export const getProductsContorller = async (req, res) => {
     throwError(!products, "Plese try againe")
     response(res, { data: products })
 }
-export const updateProductContorller = async (req, res) => {
-    const body = req?.body
+export const updateProductContorller = async (req, res)=>{
+    const  body = req?.body
     const id = req?.body?.id
     throwError(!id, "id required")
     const data = await productService.updateProductService(body)
-    response(res, { data: data })
+    response(res, {data: data})
 
 }
