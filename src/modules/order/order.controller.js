@@ -46,6 +46,10 @@ const statusCountController = async (req, res) => {
 // create order
 const createOrderController = async (req, res) => {
   const body = req?.body
+  const keys = Object.keys(body || {})
+
+  for (const key of keys) if (key !== "note") throwError(!body[key], `${key} are required`);
+
   const data = await createOrderService(body)
   throwError(!data, "Order create faild")
   response(res, {
