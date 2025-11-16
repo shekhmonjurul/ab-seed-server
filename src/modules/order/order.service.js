@@ -28,7 +28,6 @@ const getOrderService = async (limit, offset) => {
     order: [['createdAt', 'DESC']],
     limit: limit,
     offset: offset
-
   })
 
   return orders
@@ -53,7 +52,6 @@ const getOrderServiceByStatus = async (status, limit, offset) => {
     order: [['createdAt', 'DESC']],
     limit: limit,
     offset: offset
-
   })
 
   return orders
