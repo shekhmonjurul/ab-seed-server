@@ -62,7 +62,8 @@ export const addProductController = async (req, res) => {
     const body = req?.body
     const files = req?.files
 
-    requestBodyRequiredCheckFunction(body, (key !== "long_description" && key !== "category" && key !== "category_id"))
+
+    requestBodyRequiredCheckFunction(body, `(key !== "long_description" && key !== "category" && key !== "category_id")`, throwError)
 
     throwError(!files[0], "prodcut iamege ar requied")
 
